@@ -21,8 +21,6 @@ public class TipoPago {
     @Column(name = "nombre_pago", nullable = false)
     private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
+
 
 }

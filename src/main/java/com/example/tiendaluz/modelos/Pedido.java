@@ -26,5 +26,9 @@ public class Pedido {
     @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
 
+    @ManyToOne
+    @JoinColumn(name = "tipo_pago_id")
+    private TipoPago tipoPago;
+
 
 }
