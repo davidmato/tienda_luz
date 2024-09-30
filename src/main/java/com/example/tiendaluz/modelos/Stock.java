@@ -24,11 +24,11 @@ public class Stock {
     private Integer cantidad;
 
     @ManyToOne
-    @JoinColumn(name = "producto_id")
+    @JoinColumn(name = "id_producto")
     private Producto producto;
 
     @ManyToOne
-    @JoinColumn(name = "tipo_talla")
+    @JoinColumn(name = "id_tipo_talla")
     private TipoTalla tipoTalla;
 
 }

@@ -23,7 +23,7 @@ public class TipoTalla {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "producto_id")
+    @JoinColumn(name = "id_producto")
     private Producto producto;
 
 }

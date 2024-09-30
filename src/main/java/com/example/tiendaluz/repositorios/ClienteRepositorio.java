@@ -11,4 +11,7 @@ import java.util.List;
 public interface ClienteRepositorio extends JpaRepository<Cliente, Integer> {
 
 
+    //JPA Interface select * from cliente where nombre = "";
+    List<Cliente> findAllByNombreEquals(String nombre);
+
 }

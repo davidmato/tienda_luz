@@ -26,14 +26,14 @@ public class LineaPedido {
     private Double precioCompra;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id")
+    @JoinColumn(name = "id_pedido")
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "producto_id")
+    @JoinColumn(name = "id_producto")
     private Producto producto;
 
     @ManyToOne
-    @JoinColumn(name = "tipo_talla_id")
+    @JoinColumn(name = "id_tipo_talla")
     private TipoTalla tipoTalla;
 }
