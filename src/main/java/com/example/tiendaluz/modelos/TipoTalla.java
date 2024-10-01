@@ -22,7 +22,7 @@ public class TipoTalla {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_producto")
     private Producto producto;
 

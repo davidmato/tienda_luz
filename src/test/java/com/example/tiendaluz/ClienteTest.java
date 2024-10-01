@@ -21,7 +21,7 @@ public class ClienteTest {
         Cliente cliente = new Cliente();
         cliente.setNombre("Juan");
         cliente.setApellido("Perez");
-        cliente.setDni("1234567A");
+        cliente.setDni("12344346A");
         cliente.setDireccion("Calle 123");
         cliente.setTelefono("1234567");
         cliente.setEmail("juanperez@safaryes.es");
@@ -31,9 +31,9 @@ public class ClienteTest {
 
     @Test
     void testEditarCliente(){
-        Cliente cliente = clienteServices.getById(6);
+        Cliente cliente = clienteServices.getById(5);
         cliente.setNombre("Felipe");
-        cliente.setApellido("Perez");
+        cliente.setApellido("Rodriguez");
         cliente.setDni("1234097A");
         cliente.setDireccion("Calle 823");
         cliente.setTelefono("1234567");

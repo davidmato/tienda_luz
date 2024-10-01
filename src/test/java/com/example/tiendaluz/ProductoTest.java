@@ -22,7 +22,7 @@ public class ProductoTest {
         producto.setNombre("camiseta");
         producto.setColor("azul");
         producto.setDescripcion("hecha de algodon");
-        producto.setUnidades(5);
+        producto.setUnidades(98);
         Producto productoGuardado = productoServices.guardar(producto);
         System.out.println(productoGuardado.toString());
     }

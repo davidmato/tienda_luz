@@ -1,16 +1,20 @@
 package com.example.tiendaluz.services;
 
 import com.example.tiendaluz.modelos.TipoTalla;
+import com.example.tiendaluz.repositorios.CatalogoRepositorio;
 import com.example.tiendaluz.repositorios.TipoTallaRepositorio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class TipoTallaServices {
     private TipoTallaRepositorio tipoTallaRepositorio;
+    private CatalogoRepositorio catalogoRepositorio;
 
     /**
      * Busca productos por nombre
@@ -46,9 +50,10 @@ public class TipoTallaServices {
     /**
      * eliminar producto por id
      */
-
+    @Transactional
     public void eliminarPorId(Integer id) {
         tipoTallaRepositorio.deleteById(id);
+
     }
 
 }

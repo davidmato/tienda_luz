@@ -24,11 +24,11 @@ public class Catalogo {
     private Double precio;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_producto")
     private Producto producto;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_tipo_talla")
     private TipoTalla tipoTalla;
 
