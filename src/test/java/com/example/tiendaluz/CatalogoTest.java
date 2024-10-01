@@ -51,6 +51,6 @@ public class CatalogoTest {
     }
     @Test
     void testEditarCatalogo(){
-        Catalogo catalogo=
+
     }
 }
