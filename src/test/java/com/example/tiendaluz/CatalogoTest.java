@@ -61,4 +61,20 @@ public class CatalogoTest {
         System.out.println(catalogoGuardado.toString());
 
     }
+    @Test
+    @Transactional
+    void testEliminarCatalogo(){
+        catalogoServices.eliminarPorID(2);
+    }
+
+    @Test
+    void testBuscarCatalogosPorPrecio(){
+        System.out.println("Catalogos");
+        for (Catalogo c : catalogoServices.getAll()){
+            System.out.println(c.getPrecio());
+        }
+    }
+    @Test
+    void eliminarCatalogo(){
+    }
 }
