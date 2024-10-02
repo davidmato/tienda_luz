@@ -50,7 +50,15 @@ public class CatalogoTest {
 
     }
     @Test
+    @Transactional
+    @Commit
     void testEditarCatalogo(){
+        Catalogo catalogo = catalogoServices.getById(1);
+        catalogo.setPrecio(40.5);
+        catalogo.setProducto(productoServices.getById(1));
+        catalogo.setTipoTalla(tipoTallaServices.getById(1));
+        Catalogo catalogoGuardado = catalogoServices.guardar(catalogo);
+        System.out.println(catalogoGuardado.toString());
 
     }
 }

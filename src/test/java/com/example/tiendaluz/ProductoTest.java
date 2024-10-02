@@ -28,7 +28,7 @@ public class ProductoTest {
     }
     @Test
     void testEditarProducto(){
-        Producto producto = productoServices.buscarPorId(6);
+        Producto producto = productoServices.getById(6);
         producto.setNombre("camiseta");
         producto.setColor("azul");
         producto.setDescripcion("hecha de algodon");

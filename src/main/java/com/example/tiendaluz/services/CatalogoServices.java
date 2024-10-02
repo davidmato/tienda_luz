@@ -17,7 +17,7 @@ public class CatalogoServices {
      * Busca catalogo por precio
      * param nombre
      */
-    public List<Catalogo> buscarClientePorPrecio(Double precio) {
+    public List<Catalogo> buscarClientePorPrecio(Integer precio) {
         return catalogoRepositorio.findAllByPrecioEquals(precio);
     }
 
@@ -27,30 +27,35 @@ public class CatalogoServices {
     public List<Catalogo> getAll() {
             return catalogoRepositorio.findAll();
     }
+    /**
+     * Buscar una catalogo por id
+     */
+    public Catalogo getById(Integer id) {
+        return catalogoRepositorio.findById(id).orElse(null);
+    }
 
-
-    
 
     /**
      * crea una catalogos nueva o modifica una existente
      */
 
-    public Catalogo guardar(Catalogo catalogo) {
+    public Catalogo guardar (Catalogo catalogo){
         return catalogoRepositorio.save(catalogo);
     }
     /**
      * eliminar una catalogo por id
      */
 
-    public void eliminarPorID(Integer id) {
+    public void eliminarPorID (Integer id){
         catalogoRepositorio.deleteById(id);
     }
     /**
      * eliminar una catalogo
      */
-    public void eliminar(Catalogo catalogo) {
+    public void eliminar (Catalogo catalogo){
         catalogoRepositorio.delete(catalogo);
     }
+
 
 }
 

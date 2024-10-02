@@ -33,7 +33,7 @@ public class ProductoServices {
      * buscar producto por id
      */
 
-    public Producto buscarPorId(Integer id){
+    public Producto getById(Integer id){
         return productoRepositorio.findById(id).orElse(null);
     }
 

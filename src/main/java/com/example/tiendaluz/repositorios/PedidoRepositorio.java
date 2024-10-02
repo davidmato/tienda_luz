@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PedidoRepositorio extends JpaRepository<Pedido, Integer> {
+
 }

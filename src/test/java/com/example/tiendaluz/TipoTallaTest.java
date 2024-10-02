@@ -2,7 +2,6 @@ package com.example.tiendaluz;
 
 import com.example.tiendaluz.modelos.Producto;
 import com.example.tiendaluz.modelos.TipoTalla;
-import com.example.tiendaluz.services.CatalogoServices;
 import com.example.tiendaluz.services.ProductoServices;
 import com.example.tiendaluz.services.TipoTallaServices;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ public class TipoTallaTest {
     }
     @Test
     void testEditarTipoTalla(){
-        TipoTalla tipoTalla = tipoTallaServices.buscarPorId(6);
+        TipoTalla tipoTalla = tipoTallaServices.getById(6);
         tipoTalla.setNombre("L");
         TipoTalla tipoTallaGuardado = tipoTallaServices.guardar(tipoTalla);
         System.out.println(tipoTallaGuardado.toString());
@@ -50,7 +49,7 @@ public class TipoTallaTest {
     @Test
     @Transactional
     void testEliminar(){
-        tipoTallaServices.eliminarPorId(1);
+        tipoTallaServices.eliminarPorId(3);
     }
 
     @Test

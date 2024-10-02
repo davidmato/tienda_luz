@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -17,7 +16,7 @@ public class TipoTallaServices {
     private CatalogoRepositorio catalogoRepositorio;
 
     /**
-     * Busca productos por nombre
+     * Busca tipoTalla por nombre
      * param nombre
      */
     public List<TipoTalla> buscarPorNombre(String nombre) {
@@ -26,29 +25,29 @@ public class TipoTallaServices {
     }
 
     /**
-     * Buscar todos los productos
+     * Buscar todos los tipoTalla
      */
     public List<TipoTalla> getAll() {
         return tipoTallaRepositorio.findAll();
     }
 
     /**
-     * buscar producto por id
+     * buscar tipoTalla por id
      */
 
-    public TipoTalla buscarPorId(Integer id){
+    public TipoTalla getById(Integer id){
         return tipoTallaRepositorio.findById(id).orElse(null);
     }
 
     /**
-     * crea un producto nuevo o modifica uno ya existente
+     * crea un tipoTalla nuevo o modifica uno ya existente
      */
     public TipoTalla guardar(TipoTalla tipoTalla){
         return tipoTallaRepositorio.save(tipoTalla);
     }
 
     /**
-     * eliminar producto por id
+     * eliminar tipoTalla por id
      */
     @Transactional
     public void eliminarPorId(Integer id) {
