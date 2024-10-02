@@ -62,9 +62,8 @@ public class CatalogoTest {
 
     }
     @Test
-    @Transactional
     void testEliminarCatalogo(){
-        catalogoServices.eliminarPorID(2);
+        catalogoServices.eliminarPorID(4);
     }
 
     @Test
@@ -75,6 +74,10 @@ public class CatalogoTest {
         }
     }
     @Test
-    void eliminarCatalogo(){
+    @Transactional
+    @Commit
+    void eliminarCatalogoEntero(){
+        catalogoServices.eliminar(catalogoServices.getById(2));
+
     }
 }
