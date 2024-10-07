@@ -16,7 +16,7 @@ public class ClienteControlador {
     private ClienteServices clienteServices;
 
     @GetMapping("/listar")
-    public List<Cliente> getAllClientes(){
+    public List<Cliente> getAllClientes() {
         List<Cliente> cliente = clienteServices.getAll();
         return cliente;
 
