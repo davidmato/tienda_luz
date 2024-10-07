@@ -12,6 +12,12 @@ import java.util.List;
 public class ClienteServices {
     private ClienteRepositorio clienteRepositorio;
 
+
+    /*
+
+     */
+
+
     /**
      * Busca cliente por nombre
      * param nombre
@@ -30,6 +36,8 @@ public class ClienteServices {
         return clienteRepositorio.findAll();
 
     }
+
+
 
     /**
      * Buscar cliente por id
