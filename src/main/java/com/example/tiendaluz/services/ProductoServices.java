@@ -1,11 +1,13 @@
 package com.example.tiendaluz.services;
 
 
+import com.example.tiendaluz.dto.ProductoDTO;
 import com.example.tiendaluz.modelos.Producto;
 import com.example.tiendaluz.repositorios.ProductoRepositorio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,7 +64,51 @@ public class ProductoServices {
         productoRepositorio.delete(producto);
     }
 
+    //DTO
 
+    /**
+     * crear un producto
+     */
 
+    public Producto crearProducto(ProductoDTO dto){
+        Producto entity = new Producto();
+        entity.setNombre(dto.getNombre());
+        entity.setDescripcion(dto.getDescripcion());
+        entity.setUnidades(dto.getUnidades());
+        entity.setColor(dto.getColor());
+        return productoRepositorio.save(entity);
+    }
+
+    /**
+     * editar un producto
+     */
+
+    public Producto editarProducto(ProductoDTO dto,Integer id){
+        Producto entity = productoRepositorio.getReferenceById(id);
+        entity.setNombre(dto.getNombre());
+        entity.setDescripcion(dto.getDescripcion());
+        entity.setUnidades(dto.getUnidades());
+        entity.setColor(dto.getColor());
+        return productoRepositorio.save(entity);
+    }
+
+    /**
+     * buscar por dto
+     * @return
+     */
+
+    public List<ProductoDTO>getAllDTO() {
+        List<Producto> productos = productoRepositorio.findAll();
+        List<ProductoDTO> productosDTO = new ArrayList<>();
+        for (Producto producto : productos) {
+            ProductoDTO dto = new ProductoDTO();
+            dto.setNombre(producto.getNombre());
+            dto.setDescripcion(producto.getDescripcion());
+            dto.setUnidades(producto.getUnidades());
+            dto.setColor(producto.getColor());
+            productosDTO.add(dto);
+        }
+        return productosDTO;
+    }
 
 }

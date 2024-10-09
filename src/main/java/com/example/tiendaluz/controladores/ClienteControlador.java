@@ -1,6 +1,7 @@
 package com.example.tiendaluz.controladores;
 
 
+import com.example.tiendaluz.dto.ClienteDTO;
 import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.services.ClienteServices;
 import lombok.AllArgsConstructor;
@@ -43,6 +44,61 @@ public class ClienteControlador {
 
     @DeleteMapping
     public String eliminar(@RequestParam Integer id){
+        clienteServices.eliminarPorID(id);
+        return "Cliente eliminado";
+    }
+    //
+    ////
+    //////DTO
+    ////
+    //
+
+    /**
+     * buscar por dto
+     * @return
+     */
+    @GetMapping("/all")
+    public List<ClienteDTO>getAllClientesDTO(){
+        List<ClienteDTO>clientes= clienteServices.getAllDTO();
+        return clientes;
+    }
+
+
+    /**
+     * crear por dto
+     * @param clienteDTO
+     * @return
+     */
+
+    @PostMapping("/crear")
+    public Cliente crearCliente(@RequestBody ClienteDTO clienteDTO){
+        return clienteServices.crearCliente(clienteDTO);
+
+    }
+
+    /**
+     * editar por dto
+     * @param clienteDTO
+     * @param id
+     * @return
+     */
+
+    @PutMapping("/editar/{id}")
+    public Cliente editarCliente(@RequestBody ClienteDTO clienteDTO,
+                                 @PathVariable Integer id){
+
+        return clienteServices.editarCliente(clienteDTO, id);
+
+    }
+
+    /**
+     * eliminar por id
+     * @param id
+     * @return
+     */
+
+    @DeleteMapping("/eliminar/{id}")
+    public String eliminarCliente(@PathVariable Integer id){
         clienteServices.eliminarPorID(id);
         return "Cliente eliminado";
     }

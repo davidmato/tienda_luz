@@ -1,6 +1,7 @@
 package com.example.tiendaluz.controladores;
 
 
+import com.example.tiendaluz.dto.ProductoDTO;
 import com.example.tiendaluz.modelos.Producto;
 import com.example.tiendaluz.services.ProductoServices;
 import lombok.AllArgsConstructor;
@@ -23,21 +24,21 @@ public class ProductoControlador {
 
     @GetMapping()
     public Producto getById(@RequestParam Integer id){
-        Producto cliente = productoServices.getById(id);
-        return cliente;
+        Producto producto = productoServices.getById(id);
+        return producto;
     }
 
     @GetMapping("/get/{id}")
     public Producto getByIdPath(@PathVariable Integer id){
-        Producto cliente = productoServices.getById(id);
-        return cliente;
+        Producto producto = productoServices.getById(id);
+        return producto;
     }
 
 
     @PostMapping
-    public Producto guardar(@RequestBody Producto cliente){
-        Producto clienteGuaradado = productoServices.guardar(cliente);
-        return clienteGuaradado;
+    public Producto guardar(@RequestBody Producto producto){
+        Producto productoGuaradado = productoServices.guardar(producto);
+        return productoGuaradado;
     }
 
     @DeleteMapping
@@ -45,5 +46,55 @@ public class ProductoControlador {
         productoServices.eliminarPorId(id);
         return "Cliente eliminado";
     }
+
+    //
+    ////
+    //////DTO
+    ////
+    //
+
+    /**
+     * buscar por dto
+     * @return
+     */
+    @GetMapping("/all")
+    public List<ProductoDTO>getAllProductosDTO(){
+        List<ProductoDTO>productos= productoServices.getAllDTO();
+        return productos;
+    }
+
+    /**
+     * crear en dto
+     * @param productoDTO
+     * @return
+     */
+
+    @PostMapping("/crear")
+    public Producto crearProducto(@RequestBody ProductoDTO productoDTO){
+        return productoServices.crearProducto(productoDTO);
+    }
+
+    /**
+     * editar
+     * @param productoDTO
+     * @return
+     */
+    @PutMapping("/editar/{id}")
+    public Producto editarProducto(@RequestBody ProductoDTO productoDTO, @PathVariable Integer id){
+        return productoServices.editarProducto(productoDTO,id);
+    }
+
+    /**
+     * eliminar por dto
+     * @return
+     */
+    @DeleteMapping("/eliminar/{id}")
+    public String eliminarPorDTO(@PathVariable Integer id){
+        productoServices.eliminarPorId(id);
+        return "Producto eliminado";
+    }
+
+
+
 
 }

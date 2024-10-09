@@ -55,4 +55,11 @@ public class TipoTallaServices {
 
     }
 
+    //dto
+
+    /**
+     * buscar por dto
+     */
+
+
 }

@@ -3,6 +3,8 @@ package com.example.tiendaluz.modelos;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tipo_pago", schema = "luz", catalog = "postgres")
 @Getter
@@ -20,6 +22,9 @@ public class TipoPago {
 
     @Column(name = "nombre_pago", nullable = false)
     private String nombre;
+
+    @OneToMany(mappedBy = "tipoPago", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pedido> pedidos;
 
 
 

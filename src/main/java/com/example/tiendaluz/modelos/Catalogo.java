@@ -3,8 +3,6 @@ package com.example.tiendaluz.modelos;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Entity
 @Table(name = "catalogo", schema = "luz", catalog = "postgres")
 @Getter
