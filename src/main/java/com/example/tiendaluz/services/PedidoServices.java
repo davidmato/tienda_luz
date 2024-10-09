@@ -47,10 +47,16 @@ public class PedidoServices {
 
     //dto
 
-    /**
-     * Buscar por dto
-     */
+    public Pedido crearDTO(PedidoDTO dto) {
+        Pedido entity = new Pedido();
+        entity.setPrecio(dto.getPrecio());
+        entity.setFecha(dto.getFecha());
 
+        TipoPago tipoPago = tipoPagoServices.getById(dto.getTipoPago().getId());
+        entity.setTipoPago(tipoPago);
+
+        return pedidoRepositorio.save(entity);
+    }
 
     public List<PedidoDTO> getAllDTO() {
         List<Pedido> pedidos = pedidoRepositorio.findAll();
@@ -59,44 +65,36 @@ public class PedidoServices {
             PedidoDTO dto = new PedidoDTO();
             dto.setPrecio(pedido.getPrecio());
             dto.setFecha(pedido.getFecha());
-            dto.setTipoPago(tipoPagoServices.convertToDTO(pedido.getTipoPago()));
+
+            TipoPagoDTO tipoPagoDTO = new TipoPagoDTO();
+            tipoPagoDTO.setNombre(pedido.getTipoPago().getNombre());
+            dto.setTipoPago(tipoPagoDTO);
+
             pedidoDTOS.add(dto);
         }
         return pedidoDTOS;
     }
 
-    /**
-     * crear dto
-     */
-    public PedidoDTO crearDTO(PedidoDTO pedidoDTO) {
-        Pedido entity = new Pedido();
-        entity.setPrecio(pedidoDTO.getPrecio());
-        entity.setFecha(pedidoDTO.getFecha());
-        entity.setTipoPago(tipoPagoServices.convertToEntity(pedidoDTO.getTipoPago()));
-        Pedido pedidoGuardado = pedidoRepositorio.save(entity);
-        return convertToDTO(pedidoGuardado);
-    }
-
-    private PedidoDTO convertToDTO(Pedido pedido) {
-        PedidoDTO dto = new PedidoDTO();
-        dto.setPrecio(pedido.getPrecio());
-        dto.setFecha(pedido.getFecha());
-        dto.setTipoPago(tipoPagoServices.convertToDTO(pedido.getTipoPago()));
-        return dto;
-    }
+//    private PedidoDTO convertToDTO(Pedido pedido) {
+//        PedidoDTO dto = new PedidoDTO();
+//        dto.setPrecio(pedido.getPrecio());
+//        dto.setFecha(pedido.getFecha());
+//        dto.setTipoPago(tipoPagoServices.convertToDTO(pedido.getTipoPago()));
+//        return dto;
+//    }
 
     /**
      * editar por dto
      */
-    public Pedido editar(PedidoDTO pedidoDTO, Integer id) {
-        Pedido entity = pedidoRepositorio.getReferenceById(id);
-        entity.setPrecio(pedidoDTO.getPrecio());
-        entity.setFecha(pedidoDTO.getFecha());
-        entity.setTipoPago(tipoPagoServices.convertToEntity(pedidoDTO.getTipoPago()));
-        return pedidoRepositorio.save(entity);
-
-
-    }
+//    public Pedido editar(PedidoDTO pedidoDTO, Integer id) {
+//        Pedido entity = pedidoRepositorio.getReferenceById(id);
+//        entity.setPrecio(pedidoDTO.getPrecio());
+//        entity.setFecha(pedidoDTO.getFecha());
+//        entity.setTipoPago(tipoPagoServices.convertToEntity(pedidoDTO.getTipoPago()));
+//        return pedidoRepositorio.save(entity);
+//
+//
+//    }
 
 
 

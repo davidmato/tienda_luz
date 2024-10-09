@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TipoPagoDTO {
+    private Integer id;
     private String nombre;
 }
