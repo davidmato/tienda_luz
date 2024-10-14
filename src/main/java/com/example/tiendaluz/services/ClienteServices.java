@@ -1,6 +1,7 @@
 package com.example.tiendaluz.services;
 
 import com.example.tiendaluz.dto.ClienteDTO;
+import com.example.tiendaluz.mappers.ClienteMapper;
 import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.repositorios.ClienteRepositorio;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,8 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ClienteServices {
+
+    private ClienteMapper clienteMapper;
     private ClienteRepositorio clienteRepositorio;
 
 
@@ -119,14 +122,7 @@ public class ClienteServices {
         List<ClienteDTO> clienteDTOS= new ArrayList<>();
 
         for (Cliente c:clientes){
-            ClienteDTO dto= new ClienteDTO();
-            dto.setNombre(c.getNombre());
-            dto.setApellido(c.getApellido());
-            dto.setDni(c.getDni());
-            dto.setTelefono(c.getTelefono());
-            dto.setDireccion(c.getDireccion());
-            dto.setEmail(c.getEmail());
-            clienteDTOS.add(dto);
+            clienteDTOS.add(clienteMapper.toDTO(c));
         }
         return clienteDTOS;
 

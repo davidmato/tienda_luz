@@ -29,11 +29,11 @@ public class LineaPedido {
     @JoinColumn(name = "id_pedido")
     private Pedido pedido;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_producto")
     private Producto producto;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_tipo_talla")
     private TipoTalla tipoTalla;
 }

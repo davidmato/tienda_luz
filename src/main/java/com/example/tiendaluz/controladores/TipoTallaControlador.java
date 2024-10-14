@@ -1,5 +1,6 @@
 package com.example.tiendaluz.controladores;
 
+import com.example.tiendaluz.dto.TipoTallaDTO;
 import com.example.tiendaluz.modelos.TipoTalla;
 import com.example.tiendaluz.services.TipoPagoServices;
 import com.example.tiendaluz.services.TipoTallaServices;
@@ -55,8 +56,8 @@ public class TipoTallaControlador {
      * buscar por dto
      */
     @GetMapping("/all")
-    public List<TipoTalla> getAllDTO() {
-        return tipoTallaServices.getAll();
+    public List<TipoTallaDTO> getAllDTO() {
+        return tipoTallaServices.getAllDTO();
     }
 
     /**
@@ -82,6 +83,8 @@ public class TipoTallaControlador {
     public void eliminarDTO(@RequestParam Integer id) {
         tipoTallaServices.eliminarPorId(id);
     }
+
+
 
 
 

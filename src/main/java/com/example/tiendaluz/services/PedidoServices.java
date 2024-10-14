@@ -6,6 +6,7 @@ import com.example.tiendaluz.modelos.Pedido;
 import com.example.tiendaluz.modelos.TipoPago;
 import com.example.tiendaluz.repositorios.PedidoRepositorio;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
+
 public class PedidoServices {
     private PedidoRepositorio pedidoRepositorio;
     private TipoPagoServices tipoPagoServices;
@@ -47,15 +49,18 @@ public class PedidoServices {
 
     //dto
 
-    public Pedido crearDTO(PedidoDTO dto) {
+    public PedidoDTO crearDTO(PedidoDTO dto) {
         Pedido entity = new Pedido();
         entity.setPrecio(dto.getPrecio());
         entity.setFecha(dto.getFecha());
+        entity.setTipoPago(tipoPagoServices.getById(dto.getIdTipoPago()));
 
-        TipoPago tipoPago = tipoPagoServices.getById(dto.getTipoPago().getId());
-        entity.setTipoPago(tipoPago);
+        if (dto.getIdTipoPago() == null || dto.getIdTipoPago() == null) {
+            throw new IllegalArgumentException("TipoPago id must not be null");
+        }
+        Pedido pedido = pedidoRepositorio.save(entity);
 
-        return pedidoRepositorio.save(entity);
+        return dto;
     }
 
     public List<PedidoDTO> getAllDTO() {
@@ -65,36 +70,31 @@ public class PedidoServices {
             PedidoDTO dto = new PedidoDTO();
             dto.setPrecio(pedido.getPrecio());
             dto.setFecha(pedido.getFecha());
-
+            TipoPago tipoPagos = pedido.getTipoPago();
             TipoPagoDTO tipoPagoDTO = new TipoPagoDTO();
-            tipoPagoDTO.setNombre(pedido.getTipoPago().getNombre());
-            dto.setTipoPago(tipoPagoDTO);
+            tipoPagoDTO.setNombre(tipoPagos.getNombre());
+            dto.setIdTipoPago(tipoPagos.getId());
 
             pedidoDTOS.add(dto);
         }
         return pedidoDTOS;
     }
 
-//    private PedidoDTO convertToDTO(Pedido pedido) {
-//        PedidoDTO dto = new PedidoDTO();
-//        dto.setPrecio(pedido.getPrecio());
-//        dto.setFecha(pedido.getFecha());
-//        dto.setTipoPago(tipoPagoServices.convertToDTO(pedido.getTipoPago()));
-//        return dto;
-//    }
+
 
     /**
      * editar por dto
      */
-//    public Pedido editar(PedidoDTO pedidoDTO, Integer id) {
-//        Pedido entity = pedidoRepositorio.getReferenceById(id);
-//        entity.setPrecio(pedidoDTO.getPrecio());
-//        entity.setFecha(pedidoDTO.getFecha());
-//        entity.setTipoPago(tipoPagoServices.convertToEntity(pedidoDTO.getTipoPago()));
-//        return pedidoRepositorio.save(entity);
-//
-//
-//    }
+    public PedidoDTO editar(PedidoDTO pedidoDTO, Integer id) {
+        Pedido entity = pedidoRepositorio.getReferenceById(id);
+
+        entity.setPrecio(pedidoDTO.getPrecio());
+        entity.setFecha(pedidoDTO.getFecha());
+        entity.setTipoPago(tipoPagoServices.getById(pedidoDTO.getIdTipoPago()));
+        Pedido pedido= pedidoRepositorio.save(entity);
+        return pedidoDTO;
+
+    }
 
 
 
