@@ -11,4 +11,7 @@ import java.util.List;
 public interface PedidoRepositorio extends JpaRepository<Pedido, Integer> {
     List<Pedido> findByTipoPago(TipoPago tipoPago);
 
+    List<Pedido> findAllByClienteId(Integer idCliente);
+
+
 }

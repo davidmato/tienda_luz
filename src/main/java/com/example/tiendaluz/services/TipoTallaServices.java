@@ -76,7 +76,7 @@ public class TipoTallaServices {
             Producto producto = tipoTalla.getProducto();
             ProductoDTO productoDTO = new ProductoDTO();
             productoDTO.setNombre(producto.getNombre());
-            dto.setIdProducto(producto.getId());
+            dto.setProducto(productoDTO);
             tipoTallaDTOS.add(dto);
         }
         return tipoTallaDTOS;

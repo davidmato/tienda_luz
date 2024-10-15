@@ -30,5 +30,9 @@ public class Pedido {
     @JoinColumn(name = "id_tipo_pago")
     private TipoPago tipoPago;
 
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
+
 
 }

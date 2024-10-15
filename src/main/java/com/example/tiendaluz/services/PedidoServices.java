@@ -1,12 +1,15 @@
 package com.example.tiendaluz.services;
 
+import com.example.tiendaluz.dto.ClienteDTO;
 import com.example.tiendaluz.dto.PedidoDTO;
 import com.example.tiendaluz.dto.TipoPagoDTO;
+import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.modelos.Pedido;
 import com.example.tiendaluz.modelos.TipoPago;
+import com.example.tiendaluz.repositorios.ClienteRepositorio;
 import com.example.tiendaluz.repositorios.PedidoRepositorio;
+import com.example.tiendaluz.repositorios.TipoPagoRepositorio;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +21,8 @@ import java.util.List;
 public class PedidoServices {
     private PedidoRepositorio pedidoRepositorio;
     private TipoPagoServices tipoPagoServices;
+    private ClienteRepositorio clienteRepositorio;
+    private TipoPagoRepositorio tipoPagoRepositorio;
 
     /**
      * Buscar todas las pedido
@@ -49,56 +54,63 @@ public class PedidoServices {
 
     //dto
 
-    public PedidoDTO crearDTO(PedidoDTO dto) {
-        Pedido entity = new Pedido();
-        entity.setPrecio(dto.getPrecio());
-        entity.setFecha(dto.getFecha());
-        entity.setTipoPago(tipoPagoServices.getById(dto.getIdTipoPago()));
-
-        if (dto.getIdTipoPago() == null || dto.getIdTipoPago() == null) {
-            throw new IllegalArgumentException("TipoPago id must not be null");
-        }
-        Pedido pedido = pedidoRepositorio.save(entity);
-
-        return dto;
-    }
-
-    public List<PedidoDTO> getAllDTO() {
-        List<Pedido> pedidos = pedidoRepositorio.findAll();
-        List<PedidoDTO> pedidoDTOS = new ArrayList<>();
-        for (Pedido pedido : pedidos) {
-            PedidoDTO dto = new PedidoDTO();
-            dto.setPrecio(pedido.getPrecio());
-            dto.setFecha(pedido.getFecha());
-            TipoPago tipoPagos = pedido.getTipoPago();
-            TipoPagoDTO tipoPagoDTO = new TipoPagoDTO();
-            tipoPagoDTO.setNombre(tipoPagos.getNombre());
-            dto.setIdTipoPago(tipoPagos.getId());
-
-            pedidoDTOS.add(dto);
-        }
-        return pedidoDTOS;
-    }
+//    public PedidoDTO crearDTO(PedidoDTO dto) {
+//        Pedido entity = new Pedido();
+//        entity.setPrecio(dto.getPrecio());
+//        entity.setFecha(dto.getFecha());
+//        entity.setTipoPago(tipoPagoServices.getById(dto.getIdTipoPago()));
+//
+//        if (dto.getIdTipoPago() == null || dto.getIdTipoPago() == null) {
+//            throw new IllegalArgumentException("TipoPago id must not be null");
+//        }
+//        Pedido pedido = pedidoRepositorio.save(entity);
+//
+//        return dto;
+//    }
+//
+//    public List<PedidoDTO> getAllDTO() {
+//        List<Pedido> pedidos = pedidoRepositorio.findAll();
+//        List<PedidoDTO> pedidoDTOS = new ArrayList<>();
+//        for (Pedido pedido : pedidos) {
+//            PedidoDTO dto = new PedidoDTO();
+//            dto.setPrecio(pedido.getPrecio());
+//            dto.setFecha(pedido.getFecha());
+//            TipoPago tipoPagos = pedido.getTipoPago();
+//            TipoPagoDTO tipoPagoDTO = new TipoPagoDTO();
+//            tipoPagoDTO.setNombre(tipoPagos.getNombre());
+//            dto.setIdTipoPago(tipoPagos.getId());
+//
+//            pedidoDTOS.add(dto);
+//        }
+//        return pedidoDTOS;
+//    }
+//
+//
+//
+//    /**
+//     * editar por dto
+//     */
+//    public PedidoDTO editar(PedidoDTO pedidoDTO, Integer id) {
+//        Pedido entity = pedidoRepositorio.getReferenceById(id);
+//
+//        entity.setPrecio(pedidoDTO.getPrecio());
+//        entity.setFecha(pedidoDTO.getFecha());
+//        entity.setTipoPago(tipoPagoServices.getById(pedidoDTO.getIdTipoPago()));
+//        Pedido pedido= pedidoRepositorio.save(entity);
+//        return pedidoDTO;
+//
+//    }
 
 
 
     /**
-     * editar por dto
+     *Metodo para crear un pedido para un cliente, con productos y tipo de pago
      */
-    public PedidoDTO editar(PedidoDTO pedidoDTO, Integer id) {
-        Pedido entity = pedidoRepositorio.getReferenceById(id);
-
-        entity.setPrecio(pedidoDTO.getPrecio());
-        entity.setFecha(pedidoDTO.getFecha());
-        entity.setTipoPago(tipoPagoServices.getById(pedidoDTO.getIdTipoPago()));
-        Pedido pedido= pedidoRepositorio.save(entity);
-        return pedidoDTO;
-
-    }
 
 
 
-    /**
-     * convertir a dto
-     */
+
+
+
+
 }

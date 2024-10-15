@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface DetallesVentaRepositorio extends JpaRepository<DetallesVenta, Integer> {
 
+    List<DetallesVenta> findByPedido_Cliente_Id(Integer clienteId);
 }

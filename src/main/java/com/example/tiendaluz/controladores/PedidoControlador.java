@@ -16,29 +16,33 @@ public class PedidoControlador {
 
 
     //dto
-    /**
-     * buscar por dto
-     */
-    @GetMapping("/all")
-    public List<PedidoDTO> getAllDTO() {
-        return pedidoServices.getAllDTO();
-    }
+//    /**
+//     * buscar por dto
+//     */
+//    @GetMapping("/all")
+//    public List<PedidoDTO> getAllDTO() {
+//        return pedidoServices.getAllDTO();
+//    }
+//
+//    /**
+//     * crear por dto
+//     */
+//    @PostMapping("/crear")
+//    public PedidoDTO crearDTO(@RequestBody PedidoDTO pedidoDTO) {
+//        return pedidoServices.crearDTO(pedidoDTO);
+//    }
+//
+//    /**
+//     * editar por dto
+//     */
+//    @PutMapping("/editar/{id}")
+//    public PedidoDTO editarDTO(@RequestBody PedidoDTO pedidoDTO,
+//                               @PathVariable Integer id) {
+//        return pedidoServices.editar(pedidoDTO,id);
+//    }
 
-    /**
-     * crear por dto
-     */
-    @PostMapping("/crear")
-    public PedidoDTO crearDTO(@RequestBody PedidoDTO pedidoDTO) {
-        return pedidoServices.crearDTO(pedidoDTO);
-    }
 
-    /**
-     * editar por dto
-     */
-    @PutMapping("/editar/{id}")
-    public PedidoDTO editarDTO(@RequestBody PedidoDTO pedidoDTO,
-                               @PathVariable Integer id) {
-        return pedidoServices.editar(pedidoDTO,id);
-    }
+
+
 
 }

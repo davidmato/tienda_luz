@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class TipoTallaDTO {
-    private String nombre;
+public class DetallesVentaDTO {
+    private Integer cantidad;
+    private Double precioUnitario;
     private ProductoDTO producto;
+    private PedidoDTO pedido;
 }

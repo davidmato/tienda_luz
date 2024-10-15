@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class PedidoDTO {
     private Double precio;
     private LocalDate fecha;
-    private Integer idTipoPago;
+    private TipoPagoDTO tipoPago;
+    private ClienteDTO cliente;
 
 }

@@ -1,11 +1,15 @@
 package com.example.tiendaluz.services;
 
+import com.example.tiendaluz.dto.CatalogoDTO;
+import com.example.tiendaluz.dto.ProductoDTO;
+import com.example.tiendaluz.dto.TipoTallaDTO;
 import com.example.tiendaluz.modelos.Catalogo;
 import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.repositorios.CatalogoRepositorio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -54,6 +58,38 @@ public class CatalogoServices {
      */
     public void eliminar (Catalogo catalogo){
         catalogoRepositorio.delete(catalogo);
+    }
+
+    /**
+     * Metodo que muestra el catalogo de todos los productos ecistentes , con modelos y tallas disponibles
+     *
+     *
+     */
+
+
+    public List<CatalogoDTO> getAllDTO() {
+        List<Catalogo> catalogos = catalogoRepositorio.findAll();
+        List<CatalogoDTO>catalogoDTOS = new ArrayList<>();
+        for (Catalogo catalogo : catalogos) {
+            CatalogoDTO dto = new CatalogoDTO();
+            dto.setPrecio(catalogo.getPrecio());
+
+            ProductoDTO productoDTO = new ProductoDTO();
+            productoDTO.setNombre(catalogo.getProducto().getNombre());
+            productoDTO.setDescripcion(catalogo.getProducto().getDescripcion());
+            productoDTO.setColor(catalogo.getProducto().getColor());
+            productoDTO.setUnidades(catalogo.getProducto().getUnidades());
+
+            TipoTallaDTO tipoTallaDTO = new TipoTallaDTO();
+            tipoTallaDTO.setNombre(catalogo.getTipoTalla().getNombre());
+            tipoTallaDTO.setProducto(productoDTO);
+
+            dto.setProducto(productoDTO);
+            dto.setTipoTalla(tipoTallaDTO);
+
+            catalogoDTOS.add(dto);
+        }
+        return catalogoDTOS;
     }
 
 
