@@ -93,6 +93,42 @@ public class CatalogoServices {
     }
 
 
+    //dto
+
+
+    /**
+     * Metodo que muestra el catalogo de todos los productos ecistentes , con modelos y tallas disponibles
+     *
+     *
+     */
+
+
+    public List<CatalogoDTO> getAllDTO() {
+        List<Catalogo> catalogos = catalogoRepositorio.findAll();
+        List<CatalogoDTO>catalogoDTOS = new ArrayList<>();
+        for (Catalogo catalogo : catalogos) {
+            CatalogoDTO dto = new CatalogoDTO();
+            dto.setPrecio(catalogo.getPrecio());
+
+            ProductoDTO productoDTO = new ProductoDTO();
+            productoDTO.setNombre(catalogo.getProducto().getNombre());
+            productoDTO.setDescripcion(catalogo.getProducto().getDescripcion());
+            productoDTO.setColor(catalogo.getProducto().getColor());
+            productoDTO.setUnidades(catalogo.getProducto().getUnidades());
+
+            TipoTallaDTO tipoTallaDTO = new TipoTallaDTO();
+            tipoTallaDTO.setNombre(catalogo.getTipoTalla().getNombre());
+            tipoTallaDTO.setProducto(productoDTO);
+
+            dto.setProducto(productoDTO);
+            dto.setTipoTalla(tipoTallaDTO);
+
+            catalogoDTOS.add(dto);
+        }
+        return catalogoDTOS;
+    }
+
+
 }
 
 

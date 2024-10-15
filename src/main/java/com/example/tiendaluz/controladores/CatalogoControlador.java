@@ -21,7 +21,7 @@ public class CatalogoControlador {
      */
 
     @GetMapping("/all")
-    public List<CatalogoDTO> getAllDTO() {
+    public List<CatalogoDTO> getAll() {
         return catalogoServices.getAllDTO();
     }
 }
