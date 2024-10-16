@@ -4,16 +4,24 @@ package com.example.tiendaluz.services;
 import com.example.tiendaluz.dto.ProductoDTO;
 import com.example.tiendaluz.modelos.Producto;
 import com.example.tiendaluz.repositorios.ProductoRepositorio;
+import com.example.tiendaluz.repositorios.TipoTallaRepositorio;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
 public class ProductoServices {
     private ProductoRepositorio productoRepositorio;
+
+    private TipoTallaRepositorio tipoTallaRepositorio;
+
 
     /**
      * Busca productos por nombre
@@ -110,5 +118,7 @@ public class ProductoServices {
         }
         return productosDTO;
     }
+
+
 
 }

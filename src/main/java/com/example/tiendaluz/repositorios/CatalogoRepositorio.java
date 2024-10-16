@@ -11,4 +11,6 @@ import java.util.List;
 public interface CatalogoRepositorio extends JpaRepository<Catalogo, Integer> {
     List<Catalogo> findAllByPrecioEquals(Integer precio);
 
+
+
 }

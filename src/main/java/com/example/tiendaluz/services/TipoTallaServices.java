@@ -3,15 +3,20 @@ package com.example.tiendaluz.services;
 import com.example.tiendaluz.dto.ProductoDTO;
 import com.example.tiendaluz.dto.TipoTallaDTO;
 import com.example.tiendaluz.modelos.Producto;
+import com.example.tiendaluz.modelos.Producto;
 import com.example.tiendaluz.modelos.TipoTalla;
 import com.example.tiendaluz.repositorios.CatalogoRepositorio;
 import com.example.tiendaluz.repositorios.TipoTallaRepositorio;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
@@ -20,6 +25,7 @@ import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 public class TipoTallaServices {
     private TipoTallaRepositorio tipoTallaRepositorio;
     private CatalogoRepositorio catalogoRepositorio;
+    private ProductoServices productoServices;
 
     /**
      * Busca tipoTalla por nombre
@@ -80,6 +86,30 @@ public class TipoTallaServices {
             tipoTallaDTOS.add(dto);
         }
         return tipoTallaDTOS;
+    }
+
+    /**
+     * Cantidad de dicho producto que hay de la talla indicada . Si no hayt ninguno muestra un mensaje  de "no hay productos disponibles"
+     * @return idProducto, talla
+     */
+    public Map<String, Object> cantidadProducto(Integer idProducto, String talla) {
+        Producto producto = productoServices.getById(idProducto);
+        Map<String, Object> response = new HashMap<>();
+        if (producto == null) {
+            response.put("message", "No hay productos disponibles");
+            return response;
+        }
+        TipoTalla tipoTalla = buscarPorNombre(talla).stream()
+                .filter(t -> t.getProducto().getId().equals(producto.getId()))
+                .findFirst()
+                .orElse(null);
+        if (tipoTalla == null) {
+            response.put("message", "No hay productos disponibles");
+            return response;
+        }
+        response.put("Alerta:", "Hay productos disponibles");
+        response.put("Unidades", producto.getUnidades());
+        return response;
     }
 
 

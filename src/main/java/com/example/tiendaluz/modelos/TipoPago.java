@@ -23,8 +23,7 @@ public class TipoPago {
     @Column(name = "nombre_pago", nullable = false)
     private String nombre;
 
-    @OneToMany(mappedBy = "tipoPago", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pedido> pedidos;
+
 
 
 

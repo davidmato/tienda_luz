@@ -1,7 +1,9 @@
 package com.example.tiendaluz.modelos;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.*;import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 
 import java.time.LocalDate;
 
@@ -28,6 +30,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "id_tipo_pago")
+    @JsonManagedReference
     private TipoPago tipoPago;
 
     @ManyToOne

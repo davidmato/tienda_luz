@@ -3,9 +3,7 @@ package com.example.tiendaluz.services;
 
 import com.example.tiendaluz.dto.*;
 import com.example.tiendaluz.modelos.*;
-import com.example.tiendaluz.repositorios.DetallesVentaRepositorio;
-import com.example.tiendaluz.repositorios.PedidoRepositorio;
-import com.example.tiendaluz.repositorios.TipoPagoRepositorio;
+import com.example.tiendaluz.repositorios.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +16,8 @@ public class DetallesVentaServices {
     private DetallesVentaRepositorio detallesVentaRepositorio;
     private PedidoRepositorio pedidoRepositorio;
     private TipoPagoRepositorio tipoPagoRepositorio;
+    private ProductoRepositorio productoRepositorio;
+    private ClienteRepositorio clienteRepositorio;
 
     /**
      * Buscar todas las detallesVenta
@@ -54,6 +54,10 @@ public class DetallesVentaServices {
         detallesVentaRepositorio.delete(detallesVenta);
     }
 
+
+    /**
+     *Metodo para obtener todos los detalles de venta de un cliente
+     */
     public List<DetallesVentaDTO> getAllDTOByIdCliente(Integer idCliente) {
         List<DetallesVenta> detallesVentas = detallesVentaRepositorio.findByPedido_Cliente_Id(idCliente);
         List<DetallesVentaDTO> detallesVentaDTOS = new ArrayList<>();
@@ -95,6 +99,9 @@ public class DetallesVentaServices {
                 dto.setPedido(pedidoDTO);
 
                 detallesVentaDTOS.add(dto);
+
+
+
             }
         }
         return detallesVentaDTOS;
@@ -105,45 +112,34 @@ public class DetallesVentaServices {
      *Metodo para crear un pedido para un cliente, con productos y tipo de pago
      */
 
-    public DetallesVentaDTO crearDTO(DetallesVentaDTO dto) {
+    public DetallesVenta crearDTO(DetallesVenta dto) {
         DetallesVenta entity = new DetallesVenta();
         entity.setCantidad(dto.getCantidad());
         entity.setPrecioUnitario(dto.getPrecioUnitario());
 
-        // Map ProductoDTO to Producto entity
-        Producto producto = new Producto();
-        producto.setNombre(dto.getProducto().getNombre());
-        producto.setDescripcion(dto.getProducto().getDescripcion());
-        producto.setUnidades(dto.getProducto().getUnidades());
-        producto.setColor(dto.getProducto().getColor());
+        // Obtener la entidad Producto por su ID
+        Producto producto = productoRepositorio.findById(dto.getProducto().getId())
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
         entity.setProducto(producto);
 
+        // Obtener la entidad Cliente por su ID
+        Cliente cliente = clienteRepositorio.findById(dto.getPedido().getCliente().getId())
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        // Obtener la entidad TipoPago por su ID
+        TipoPago tipoPago = tipoPagoRepositorio.findById(dto.getPedido().getTipoPago().getId())
+                .orElseThrow(() -> new RuntimeException("Tipo de pago no encontrado"));
+
         // Map PedidoDTO to Pedido entity
-        Pedido pedido = new Pedido();
-        pedido.setPrecio(dto.getPedido().getPrecio());
-        pedido.setFecha(dto.getPedido().getFecha());
-
-        // Map ClienteDTO to Cliente entity
-        Cliente cliente = new Cliente();
-        cliente.setNombre(dto.getPedido().getCliente().getNombre());
-        cliente.setApellido(dto.getPedido().getCliente().getApellido());
-        cliente.setDni(dto.getPedido().getCliente().getDni());
-        cliente.setDireccion(dto.getPedido().getCliente().getDireccion());
-        cliente.setTelefono(dto.getPedido().getCliente().getTelefono());
-        cliente.setEmail(dto.getPedido().getCliente().getEmail());
+       Pedido pedido = pedidoRepositorio.findById(dto.getPedido().getId())
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
         pedido.setCliente(cliente);
-
-        // Map TipoPagoDTO to TipoPago entity
-        TipoPago tipoPago = new TipoPago();
-        tipoPago.setNombre(dto.getPedido().getTipoPago().getNombre());
         pedido.setTipoPago(tipoPago);
 
         entity.setPedido(pedido);
 
-        if (dto.getProducto() == null || dto.getPedido() == null) {
-            throw new IllegalArgumentException("Producto id and Pedido id must not be null");
-        }
-        DetallesVenta detallesVenta = detallesVentaRepositorio.save(entity);
+        // Guardar la entidad
+        detallesVentaRepositorio.save(entity);
 
         return dto;
     }

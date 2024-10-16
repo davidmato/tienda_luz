@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ProductoRepositorio extends JpaRepository<Producto, Integer> {
     List<Producto> findAllByNombreEquals(String nombre);
+
 }

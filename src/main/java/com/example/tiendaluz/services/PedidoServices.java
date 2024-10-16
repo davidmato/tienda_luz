@@ -103,9 +103,7 @@ public class PedidoServices {
 
 
 
-    /**
-     *Metodo para crear un pedido para un cliente, con productos y tipo de pago
-     */
+
 
 
 

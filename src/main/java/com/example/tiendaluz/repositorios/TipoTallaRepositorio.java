@@ -10,4 +10,5 @@ import java.util.List;
 public interface TipoTallaRepositorio extends JpaRepository<TipoTalla, Integer> {
 
     List<TipoTalla> findAllByNombreEquals(String nombre);
-}
+
+    List<TipoTalla> findByNombreAndProductoId(String nombre, Integer idProducto);}

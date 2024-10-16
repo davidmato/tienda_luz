@@ -2,6 +2,7 @@ package com.example.tiendaluz.controladores;
 
 import com.example.tiendaluz.dto.ClienteDTO;
 import com.example.tiendaluz.dto.PedidoDTO;
+import com.example.tiendaluz.modelos.Pedido;
 import com.example.tiendaluz.services.PedidoServices;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,13 @@ public class    PedidoControlador {
 
 
     //dto
-//    /**
-//     * buscar por dto
-//     */
-//    @GetMapping("/all")
-//    public List<PedidoDTO> getAllDTO() {
-//        return pedidoServices.getAllDTO();
-//    }
+    /**
+     * buscar por dto
+     */
+    @GetMapping("/all")
+    public List<Pedido> getAll() {
+        return pedidoServices.getAll();
+    }
 //
 //    /**
 //     * crear por dto
