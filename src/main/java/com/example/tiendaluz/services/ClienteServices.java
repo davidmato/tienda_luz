@@ -69,13 +69,6 @@ public class ClienteServices {
         clienteRepositorio.deleteById(id);
     }
 
-    /**
-     * eliminar una cliente
-     */
-
-    public void eliminar(Cliente cliente) {
-        clienteRepositorio.delete(cliente);
-    }
 
     //
     ////
@@ -127,5 +120,38 @@ public class ClienteServices {
         return clienteDTOS;
 
     }
+
+    /**
+     * Mensaje indicando si se ha podidio eliminar o no el cliente
+     */
+
+    public String eliminarCliente(Integer id) {
+        String mensaje;
+        Cliente cliente = getById(id);
+
+        if(cliente == null){
+            return  "El cliente con el id indicado no exite";
+        }
+
+        try {
+            clienteRepositorio.deleteById(id);
+            cliente = getById(id);
+            if(cliente != null){
+                mensaje =  "No se ha podido eliminar el cliente";
+            }else{
+                mensaje = "Cliente eliminado correctamente";
+            }
+        } catch (Exception e) {
+            mensaje =  "No se ha podido eliminar el cliente";
+        }
+
+        return mensaje;
+    }
+
+
+    public void eliminar(Cliente cliente){
+        clienteRepositorio.delete(cliente);
+    }
+
 
 }

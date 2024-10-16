@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class StockDTO {
     private Integer cantidad;
-    private ProductoDTO producto;
-    private TipoTallaDTO tipoTalla;
+    private Integer idProducto;
+    private Integer idTipoTalla;
 }

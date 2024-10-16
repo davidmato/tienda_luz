@@ -26,9 +26,5 @@ public class DetallesVentaControlador {
         return detallesVentaServices.getAllDTOByIdCliente(idCliente);
     }
 
-    @PostMapping("/crear")
-    public DetallesVenta crearDetallesVenta(@RequestBody DetallesVenta detallesVentaDTO) {
-        return detallesVentaServices.crearDTO(detallesVentaDTO);
 
-    }
 }

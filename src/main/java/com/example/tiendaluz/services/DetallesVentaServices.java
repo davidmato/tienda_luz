@@ -92,8 +92,8 @@ public class DetallesVentaServices {
                 clienteDTO.setTelefono(cliente.getTelefono());
                 clienteDTO.setEmail(cliente.getEmail());
 
-                pedidoDTO.setTipoPago(tipoPagoDTO);
-                pedidoDTO.setCliente(clienteDTO);
+                pedidoDTO.setIdtipoPago(tipoPagoDTO);
+                pedidoDTO.setIdcliente(clienteDTO);
 
                 dto.setProducto(productoDTO);
                 dto.setPedido(pedidoDTO);
@@ -108,39 +108,5 @@ public class DetallesVentaServices {
     }
 
 
-    /**
-     *Metodo para crear un pedido para un cliente, con productos y tipo de pago
-     */
 
-    public DetallesVenta crearDTO(DetallesVenta dto) {
-        DetallesVenta entity = new DetallesVenta();
-        entity.setCantidad(dto.getCantidad());
-        entity.setPrecioUnitario(dto.getPrecioUnitario());
-
-        // Obtener la entidad Producto por su ID
-        Producto producto = productoRepositorio.findById(dto.getProducto().getId())
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-        entity.setProducto(producto);
-
-        // Obtener la entidad Cliente por su ID
-        Cliente cliente = clienteRepositorio.findById(dto.getPedido().getCliente().getId())
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
-
-        // Obtener la entidad TipoPago por su ID
-        TipoPago tipoPago = tipoPagoRepositorio.findById(dto.getPedido().getTipoPago().getId())
-                .orElseThrow(() -> new RuntimeException("Tipo de pago no encontrado"));
-
-        // Map PedidoDTO to Pedido entity
-       Pedido pedido = pedidoRepositorio.findById(dto.getPedido().getId())
-                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
-        pedido.setCliente(cliente);
-        pedido.setTipoPago(tipoPago);
-
-        entity.setPedido(pedido);
-
-        // Guardar la entidad
-        detallesVentaRepositorio.save(entity);
-
-        return dto;
-    }
 }

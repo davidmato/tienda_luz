@@ -1,19 +1,27 @@
 package com.example.tiendaluz.services;
 
 import com.example.tiendaluz.dto.ClienteDTO;
+import com.example.tiendaluz.dto.CrearPedidoDTO;
 import com.example.tiendaluz.dto.PedidoDTO;
 import com.example.tiendaluz.dto.TipoPagoDTO;
 import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.modelos.Pedido;
+import com.example.tiendaluz.modelos.Producto;
 import com.example.tiendaluz.modelos.TipoPago;
 import com.example.tiendaluz.repositorios.ClienteRepositorio;
 import com.example.tiendaluz.repositorios.PedidoRepositorio;
+import com.example.tiendaluz.repositorios.ProductoRepositorio;
 import com.example.tiendaluz.repositorios.TipoPagoRepositorio;
 import lombok.AllArgsConstructor;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -23,6 +31,8 @@ public class PedidoServices {
     private TipoPagoServices tipoPagoServices;
     private ClienteRepositorio clienteRepositorio;
     private TipoPagoRepositorio tipoPagoRepositorio;
+    private ClienteServices clienteServices;
+    private ProductoRepositorio productoRepositorio;
 
     /**
      * Buscar todas las pedido
@@ -103,9 +113,26 @@ public class PedidoServices {
 
 
 
+    /**
+     *Metodo para crear un pedido para un cliente, con productos, cantidades,etc
+     */
+
+    public Pedido crearPedido(CrearPedidoDTO pedidoDTO) {
+        Pedido entity = new Pedido();
+        entity.setPrecio(pedidoDTO.getPrecioUnitario());
+        entity.setFecha(pedidoDTO.getFecha());
 
 
+        Cliente cliente = clienteRepositorio.getById(pedidoDTO.getIdCliente());
+        entity.setCliente(cliente);
+        TipoPago tipoPago = tipoPagoRepositorio.getById(pedidoDTO.getIdTipoPago());
+        entity.setTipoPago(tipoPago);
+        Producto producto= productoRepositorio.getById(pedidoDTO.getIdProducto());
+        entity.setProducto(producto);
+        Pedido pedido = pedidoRepositorio.save(entity);
+        return pedido;
 
+    }
 
 
 

@@ -1,5 +1,6 @@
 package com.example.tiendaluz.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TipoPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

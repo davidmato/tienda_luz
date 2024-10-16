@@ -13,5 +13,8 @@ public interface PedidoRepositorio extends JpaRepository<Pedido, Integer> {
 
     List<Pedido> findAllByClienteId(Integer idCliente);
 
+    List<Pedido> findByClienteId(Integer idCliente);
+
+
 
 }

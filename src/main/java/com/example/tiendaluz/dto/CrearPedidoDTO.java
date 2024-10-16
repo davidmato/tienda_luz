@@ -5,16 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Set;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class PedidoDTO {
-    private Double precio;
+public class CrearPedidoDTO {
+    private Integer idCliente;
+    private Integer idProducto;
+    private Integer idTipoPago;
     private LocalDate fecha;
-    private TipoPagoDTO idtipoPago;
-    private ClienteDTO idcliente;
-
-
+    private Double precioUnitario;
 }

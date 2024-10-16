@@ -1,7 +1,9 @@
 package com.example.tiendaluz.controladores;
 
 import com.example.tiendaluz.dto.ClienteDTO;
+import com.example.tiendaluz.dto.CrearPedidoDTO;
 import com.example.tiendaluz.dto.PedidoDTO;
+import com.example.tiendaluz.modelos.DetallesVenta;
 import com.example.tiendaluz.modelos.Pedido;
 import com.example.tiendaluz.services.PedidoServices;
 import lombok.AllArgsConstructor;
@@ -42,7 +44,11 @@ public class    PedidoControlador {
 //        return pedidoServices.editar(pedidoDTO,id);
 //    }
 
+    @PostMapping("/crear")
+    public Pedido crearDetallesVenta(@RequestBody CrearPedidoDTO pedidoDTO) {
+        return pedidoServices.crearPedido(pedidoDTO);
 
+    }
 
 
 
