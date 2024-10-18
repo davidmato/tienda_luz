@@ -92,8 +92,8 @@ public class DetallesVentaServices {
                 clienteDTO.setTelefono(cliente.getTelefono());
                 clienteDTO.setEmail(cliente.getEmail());
 
-                pedidoDTO.setIdtipoPago(tipoPagoDTO);
-                pedidoDTO.setIdcliente(clienteDTO);
+                pedidoDTO.setTipoPago(tipoPagoDTO);
+                pedidoDTO.setCliente(clienteDTO);
 
                 dto.setProducto(productoDTO);
                 dto.setPedido(pedidoDTO);

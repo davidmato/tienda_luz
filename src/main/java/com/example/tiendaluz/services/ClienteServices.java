@@ -3,9 +3,14 @@ package com.example.tiendaluz.services;
 import com.example.tiendaluz.dto.ClienteDTO;
 import com.example.tiendaluz.mappers.ClienteMapper;
 import com.example.tiendaluz.modelos.Cliente;
+import com.example.tiendaluz.modelos.Pedido;
+import com.example.tiendaluz.modelos.Producto;
 import com.example.tiendaluz.repositorios.ClienteRepositorio;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +21,9 @@ public class ClienteServices {
 
     private ClienteMapper clienteMapper;
     private ClienteRepositorio clienteRepositorio;
+    private static final Logger logger = LoggerFactory.getLogger(ClienteServices.class);
+
+
 
 
     /*
@@ -125,24 +133,20 @@ public class ClienteServices {
      * Mensaje indicando si se ha podidio eliminar o no el cliente
      */
 
+    @Transactional
     public String eliminarCliente(Integer id) {
         String mensaje;
-        Cliente cliente = getById(id);
+        Cliente cliente = clienteRepositorio.findById(id).orElse(null);
 
-        if(cliente == null){
-            return  "El cliente con el id indicado no exite";
+        if (cliente == null) {
+            return "El cliente con el id indicado no existe";
         }
-
         try {
             clienteRepositorio.deleteById(id);
-            cliente = getById(id);
-            if(cliente != null){
-                mensaje =  "No se ha podido eliminar el cliente";
-            }else{
-                mensaje = "Cliente eliminado correctamente";
-            }
+            mensaje = "Cliente eliminado correctamente";
         } catch (Exception e) {
-            mensaje =  "No se ha podido eliminar el cliente";
+            logger.error("Error al eliminar el cliente con id: {}", id, e);
+            mensaje = "No se ha podido eliminar el cliente";
         }
 
         return mensaje;

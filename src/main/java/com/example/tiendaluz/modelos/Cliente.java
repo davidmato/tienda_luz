@@ -1,8 +1,12 @@
 package com.example.tiendaluz.modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "cliente", schema = "luz", catalog = "postgres")
@@ -38,6 +42,10 @@ public class Cliente {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pedido> pedidos = new ArrayList<>();
 
 
 

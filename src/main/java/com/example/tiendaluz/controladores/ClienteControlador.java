@@ -5,6 +5,7 @@ import com.example.tiendaluz.dto.ClienteDTO;
 import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.services.ClienteServices;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -96,7 +97,6 @@ public class ClienteControlador {
      * @param id
      * @return
      */
-
     @DeleteMapping("/eliminar/{id}")
     public String eliminarCliente(@PathVariable Integer id){
         return clienteServices.eliminarCliente(id);

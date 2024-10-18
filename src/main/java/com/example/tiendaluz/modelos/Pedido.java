@@ -1,5 +1,6 @@
 package com.example.tiendaluz.modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -7,6 +8,8 @@ import lombok.*;import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pedido", schema = "luz", catalog = "postgres")
@@ -36,12 +39,21 @@ public class Pedido {
     private TipoPago tipoPago;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente", nullable = false)
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "id_producto", nullable = false)
+    @JoinColumn(name = "id_producto")
     private Producto producto;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetallesVenta> detallesVenta = new ArrayList<>();
+
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LineaPedido> lineaPedido = new ArrayList<>();
 
 
 }
