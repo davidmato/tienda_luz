@@ -10,6 +10,7 @@ import lombok.*;import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "pedido", schema = "luz", catalog = "postgres")

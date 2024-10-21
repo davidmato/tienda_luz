@@ -1,24 +1,14 @@
 package com.example.tiendaluz.services;
 
-import com.example.tiendaluz.dto.ClienteDTO;
-import com.example.tiendaluz.dto.CrearPedidoDTO;
-import com.example.tiendaluz.dto.PedidoDTO;
-import com.example.tiendaluz.dto.TipoPagoDTO;
+import com.example.tiendaluz.dto.*;
 import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.modelos.Pedido;
 import com.example.tiendaluz.modelos.Producto;
 import com.example.tiendaluz.modelos.TipoPago;
-import com.example.tiendaluz.repositorios.ClienteRepositorio;
-import com.example.tiendaluz.repositorios.PedidoRepositorio;
-import com.example.tiendaluz.repositorios.ProductoRepositorio;
-import com.example.tiendaluz.repositorios.TipoPagoRepositorio;
+import com.example.tiendaluz.repositorios.*;
 import lombok.AllArgsConstructor;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -133,8 +123,6 @@ public class PedidoServices {
         return pedido;
 
     }
-
-
 
 
 

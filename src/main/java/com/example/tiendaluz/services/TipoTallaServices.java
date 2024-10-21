@@ -89,28 +89,17 @@ public class TipoTallaServices {
     }
 
     /**
-     * Cantidad de dicho producto que hay de la talla indicada . Si no hayt ninguno muestra un mensaje  de "no hay productos disponibles"
+     * Cantidad de dicho producto que hay de la talla indicada . Si no hay ninguno muestra un mensaje  de "no hay productos disponibles"
      * @return idProducto, talla
      */
-    public Map<String, Object> cantidadProducto(Integer idProducto, String talla) {
+    public String cantidadProducto(Integer idProducto, String talla) {
         Producto producto = productoServices.getById(idProducto);
-        Map<String, Object> response = new HashMap<>();
-        if (producto == null) {
-            response.put("message", "No hay productos disponibles");
-            return response;
-        }
-        TipoTalla tipoTalla = buscarPorNombre(talla).stream()
-                .filter(t -> t.getProducto().getId().equals(producto.getId()))
-                .findFirst()
-                .orElse(null);
-        if (tipoTalla == null) {
-            response.put("message", "No hay productos disponibles");
-            return response;
-        }
-        response.put("Alerta:", "Hay productos disponibles");
-        response.put("Unidades", producto.getUnidades());
-        return response;
-    }
 
+        if (producto == null || tipoTallaRepositorio.findByNombreAndProductoId(talla, idProducto) == null) {
+            return "No hay productos disponibles";
+        }
+
+        return "Hay productos disponibles. Unidades: " + producto.getUnidades();
+    }
 
 }

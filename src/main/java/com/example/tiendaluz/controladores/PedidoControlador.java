@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/pedido")
 @AllArgsConstructor
-public class    PedidoControlador {
+public class PedidoControlador {
 
     PedidoServices pedidoServices;
 

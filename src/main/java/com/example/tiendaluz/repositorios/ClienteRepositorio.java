@@ -16,4 +16,5 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Integer> {
     List<Cliente> findAllByNombreEquals(String nombre);
 
 
+
 }

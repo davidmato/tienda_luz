@@ -25,7 +25,7 @@ public class DisponibilidadControlador {
 
 
     @GetMapping("/{idProducto}/{talla}")
-    public Map<String, Object> getProductoCantidad(@PathVariable Integer idProducto, @PathVariable String talla) {
+    public String getProductoCantidad(@PathVariable Integer idProducto, @PathVariable String talla) {
         return productoServices.cantidadProducto(idProducto, talla);
     }
 }
