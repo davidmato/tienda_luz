@@ -5,14 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class CrearPedidoDTO {
     private Integer idCliente;
-    private Integer idProducto;
+    private List<Integer> idProducto;
     private Integer idTipoPago;
     private LocalDate fecha;
-    private Double precioUnitario;
+    private Double precio;
 }

@@ -1,6 +1,7 @@
 package com.example.tiendaluz.services;
 
 import com.example.tiendaluz.dto.ClienteDTO;
+import com.example.tiendaluz.exceptions.ClienteReferencedException;
 import com.example.tiendaluz.mappers.ClienteMapper;
 import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.modelos.Pedido;
@@ -9,6 +10,7 @@ import com.example.tiendaluz.repositorios.ClienteRepositorio;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -133,7 +135,6 @@ public class ClienteServices {
      * Mensaje indicando si se ha podidio eliminar o no el cliente
      */
 
-    @Transactional
     public String eliminarCliente(Integer id) {
         String mensaje;
         Cliente cliente = clienteRepositorio.findById(id).orElse(null);
@@ -144,9 +145,9 @@ public class ClienteServices {
         try {
             clienteRepositorio.deleteById(id);
             mensaje = "Cliente eliminado correctamente";
-        } catch (Exception e) {
+        } catch (DataIntegrityViolationException e) {
             logger.error("Error al eliminar el cliente con id: {}", id, e);
-            mensaje = "No se ha podido eliminar el cliente";
+            throw new ClienteReferencedException("No se puede eliminar el Cliente: está referenciado por otras entidades");
         }
 
         return mensaje;

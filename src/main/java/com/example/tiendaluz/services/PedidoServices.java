@@ -9,6 +9,7 @@ import com.example.tiendaluz.repositorios.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -102,28 +103,32 @@ public class PedidoServices {
 //    }
 
 
-
     /**
-     *Metodo para crear un pedido para un cliente, con productos, cantidades,etc
+     * Metodo para crear un pedido para un cliente, con productos, cantidades,etc
      */
 
     public Pedido crearPedido(CrearPedidoDTO pedidoDTO) {
         Pedido entity = new Pedido();
-        entity.setPrecio(pedidoDTO.getPrecioUnitario());
+        entity.setPrecio(pedidoDTO.getPrecio());
         entity.setFecha(pedidoDTO.getFecha());
-
 
         Cliente cliente = clienteRepositorio.getById(pedidoDTO.getIdCliente());
         entity.setCliente(cliente);
         TipoPago tipoPago = tipoPagoRepositorio.getById(pedidoDTO.getIdTipoPago());
         entity.setTipoPago(tipoPago);
-        Producto producto= productoRepositorio.getById(pedidoDTO.getIdProducto());
-        entity.setProducto(producto);
+
+        Set<Producto> productos = new HashSet<>();
+        for (Integer idProducto : pedidoDTO.getIdProducto()) {
+            Producto producto = productoRepositorio.getReferenceById(idProducto);
+            productos.add(producto);
+
+        }
+        entity.setProductos(productos);
+
         Pedido pedido = pedidoRepositorio.save(entity);
+
         return pedido;
-
     }
-
 
 
 }

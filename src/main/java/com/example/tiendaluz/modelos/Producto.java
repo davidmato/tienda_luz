@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -40,8 +41,6 @@ public class Producto {
     @Column(name = "color", nullable = false)
     private String color;
 
-
-
     @JsonBackReference
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TipoTalla> tipoTalla = new ArrayList<>();
@@ -50,9 +49,7 @@ public class Producto {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Catalogo> catalogo = new ArrayList<>();
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<LineaPedido> lineaPedido = new ArrayList<>();
+
 
 
 

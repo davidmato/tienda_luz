@@ -2,6 +2,7 @@ package com.example.tiendaluz.controladores;
 
 
 import com.example.tiendaluz.dto.ClienteDTO;
+import com.example.tiendaluz.exceptions.ClienteReferencedException;
 import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.services.ClienteServices;
 import lombok.AllArgsConstructor;
@@ -99,7 +100,12 @@ public class ClienteControlador {
      */
     @DeleteMapping("/eliminar/{id}")
     public String eliminarCliente(@PathVariable Integer id){
-        return clienteServices.eliminarCliente(id);
+        try {
+            clienteServices.eliminarCliente(id);
+            return "Cliente eliminado correctamente";
+        } catch (ClienteReferencedException e) {
+            return e.getMessage();
+        }
     }
 
 }
