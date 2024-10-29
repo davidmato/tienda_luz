@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class    PedidoDTO {
+public class PedidoDTO {
     private Double precio;
     private LocalDate fecha;
     private TipoPagoDTO tipoPago;

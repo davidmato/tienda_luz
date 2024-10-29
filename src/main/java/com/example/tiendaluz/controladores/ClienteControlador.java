@@ -98,6 +98,7 @@ public class ClienteControlador {
      * @param id
      * @return
      */
+
     @DeleteMapping("/eliminar/{id}")
     public String eliminarCliente(@PathVariable Integer id){
         try {

@@ -41,6 +41,8 @@ public class Producto {
     @Column(name = "color", nullable = false)
     private String color;
 
+
+
     @JsonBackReference
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TipoTalla> tipoTalla = new ArrayList<>();

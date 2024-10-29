@@ -40,8 +40,8 @@ public class TipoTallaControlador {
         return tipoTallaGuardados;
     }
 
-    @DeleteMapping
-    public String eliminar(@RequestParam Integer id) {
+    @DeleteMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Integer id) {
         tipoTallaServices.eliminarPorId(id);
         return "Cliente eliminado";
     }

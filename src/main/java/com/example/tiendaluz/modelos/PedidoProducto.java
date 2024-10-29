@@ -4,33 +4,27 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "linea_pedido", schema = "luz", catalog = "postgres")
+@Table(name = "pedido_producto", schema = "luz", catalog = "postgres")
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-
-public class LineaPedido {
-
+public class PedidoProducto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "cantidad")
-    private Integer cantidad;
-
-    @Column(name = "precio_compra")
-    private Double precioCompra;
-
     @ManyToOne
-    @JoinColumn(name = "id_pedido")
+    @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
-
     @ManyToOne
-    @JoinColumn(name = "id_tipo_talla")
-    private TipoTalla tipoTalla;
+    @JoinColumn(name = "id_producto", nullable = false)
+    private Producto producto;
+
+    @Column(name = "cantidad", nullable = false)
+    private Integer cantidad;
 }
