@@ -1,16 +1,20 @@
 package com.example.tiendaluz.services;
 
 import com.example.tiendaluz.dto.ClienteDTO;
+import com.example.tiendaluz.dto.UsuarioDTO;
+import com.example.tiendaluz.enumerados.Rol;
 import com.example.tiendaluz.exceptions.ClienteReferencedException;
 import com.example.tiendaluz.mappers.ClienteMapper;
 import com.example.tiendaluz.modelos.Cliente;
 import com.example.tiendaluz.modelos.Pedido;
 import com.example.tiendaluz.modelos.Producto;
+import com.example.tiendaluz.modelos.Usuario;
 import com.example.tiendaluz.repositorios.ClienteRepositorio;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +30,7 @@ public class ClienteServices {
     private static final Logger logger = LoggerFactory.getLogger(ClienteServices.class);
 
 
+    private PasswordEncoder passwordEncoder;
 
 
     /*
@@ -154,9 +159,59 @@ public class ClienteServices {
     }
 
 
-    public void eliminar(Cliente cliente){
-        clienteRepositorio.delete(cliente);
+
+
+    public Cliente save(ClienteDTO dto){
+        Cliente entity = new Cliente();
+        entity.setNombre(dto.getNombre());
+        entity.setApellido(dto.getApellido());
+        entity.setDni(dto.getDni());
+        entity.setDireccion(dto.getDireccion());
+        entity.setTelefono(dto.getTelefono());
+        entity.setEmail(dto.getEmail());
+
+        Usuario usuario = new Usuario();
+        usuario.setUsername(dto.getUsuarioDTO().getUsername());
+        usuario.setPassword(passwordEncoder.encode(dto.getUsuarioDTO().getPassword()));
+        usuario.setRol(dto.getUsuarioDTO().getRol() != null ? Rol.valueOf(dto.getUsuarioDTO().getRol()) : Rol.CLIENTE); // Set default role if not provided
+        entity.setUsuario(usuario);
+
+        return clienteRepositorio.save(entity);
     }
+
+
+    public List<ClienteDTO> buscarClientePorFiltror(String nombre, String letraDNI) {
+        List<Cliente> clientes;
+        if (nombre != null && letraDNI != null) {
+            clientes = clienteRepositorio.buscarPorLetraDNIYNombre(letraDNI, nombre);
+        } else if (nombre == null && letraDNI != null) {
+            clientes = clienteRepositorio.buscarPorLetraDNI(letraDNI);
+        } else if (nombre != null) {
+            clientes = clienteRepositorio.buscarPorNombre(nombre);
+        } else {
+            clientes = clienteRepositorio.findAll();
+        }
+
+        List<ClienteDTO> clienteDTOS = new ArrayList<>();
+        for (Cliente cliente : clientes) {
+            ClienteDTO dto = new ClienteDTO();
+            dto.setNombre(cliente.getNombre());
+            dto.setApellido(cliente.getApellido());
+            dto.setDni(cliente.getDni());
+            dto.setDireccion(cliente.getDireccion());
+            dto.setTelefono(cliente.getTelefono());
+            dto.setEmail(cliente.getEmail());
+            // Assuming UsuarioDTO is set similarly
+            UsuarioDTO usuarioDTO = new UsuarioDTO();
+            usuarioDTO.setUsername(cliente.getUsuario().getUsername());
+            usuarioDTO.setPassword(cliente.getUsuario().getPassword());
+            dto.setUsuarioDTO(usuarioDTO);
+            clienteDTOS.add(dto);
+        }
+        return clienteDTOS;
+    }
+
+
 
 
 }
