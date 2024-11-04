@@ -28,15 +28,15 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                                req
-                                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                                        .requestMatchers("/auth/**").permitAll()
+                    req
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
 //                                        .requestMatchers("/cliente/**").hasAnyAuthority(Rol.ADMIN.name())
 //                                        .requestMatchers("/admin/**").hasAnyAuthority(Rol.ADMIN.name())
 //                                        .requestMatchers("/clases/gestion/**").hasAnyAuthority(Rol.MONITOR.name())
 //                                        .requestMatchers("/clases/cliente/**").hasAnyAuthority(Rol.USUARIO.name())
-                                        .anyRequest()
-                                        .authenticated()
+                        .anyRequest()
+                        .authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)

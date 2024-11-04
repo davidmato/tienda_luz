@@ -201,7 +201,6 @@ public class ClienteServices {
             dto.setDireccion(cliente.getDireccion());
             dto.setTelefono(cliente.getTelefono());
             dto.setEmail(cliente.getEmail());
-            // Assuming UsuarioDTO is set similarly
             UsuarioDTO usuarioDTO = new UsuarioDTO();
             usuarioDTO.setUsername(cliente.getUsuario().getUsername());
             usuarioDTO.setPassword(cliente.getUsuario().getPassword());
