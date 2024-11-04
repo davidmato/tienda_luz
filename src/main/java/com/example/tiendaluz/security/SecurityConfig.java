@@ -31,6 +31,7 @@ public class SecurityConfig {
                     req
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/clientes/**").permitAll()
 //                                        .requestMatchers("/cliente/**").hasAnyAuthority(Rol.ADMIN.name())
 //                                        .requestMatchers("/admin/**").hasAnyAuthority(Rol.ADMIN.name())
 //                                        .requestMatchers("/clases/gestion/**").hasAnyAuthority(Rol.MONITOR.name())

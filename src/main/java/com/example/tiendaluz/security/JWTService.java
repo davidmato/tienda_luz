@@ -78,7 +78,7 @@ public class JWTService {
     }
 
     /**
-     * Método que me dice si el token a expirado
+     * Metodo que me dice si el token a expirado
      * @param token
      * @return
      */
