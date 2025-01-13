@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "pedido", schema = "luz", catalog = "postgres")
+@Table(name = "pedido", schema = "luz")//, catalog = "postgres")
 @Getter
 @Setter
 @ToString

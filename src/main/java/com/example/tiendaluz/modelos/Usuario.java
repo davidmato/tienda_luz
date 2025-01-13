@@ -10,8 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+//se quita el catalog para el tema del testing
+
 @Entity
-@Table(name = "usuario", schema = "luz", catalog = "postgres")
+@Table(name = "usuario", schema = "luz") //, catalog = "postgres")
 @Getter
 @Setter
 @ToString

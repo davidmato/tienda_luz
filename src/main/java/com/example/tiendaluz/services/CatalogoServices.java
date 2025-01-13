@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class CatalogoServices {
+public class    CatalogoServices {
 
     CatalogoRepositorio catalogoRepositorio;
     /**
@@ -35,9 +35,15 @@ public class CatalogoServices {
      * Buscar una catalogo por id
      */
     public Catalogo getById(Integer id) {
-        return catalogoRepositorio.findById(id).orElse(null);
+        try {
+            return catalogoRepositorio.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Catalogo no encontrado con el id: " + id));
+        } catch (Exception e) {
+            // Handle the exception, e.g., log it or rethrow a custom exception
+            e.printStackTrace();
+            throw e;
+        }
     }
-
 
     /**
      * crea una catalogos nueva o modifica una existente
