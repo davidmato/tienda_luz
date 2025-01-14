@@ -21,7 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Producto {
 
     @Id

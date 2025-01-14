@@ -112,7 +112,7 @@ public class PedidoServices {
     public Pedido crearPedido(CrearPedidoDTO pedidoDTO) {
 
 
-        try {
+
             Pedido entity = new Pedido();
             if (pedidoDTO.getPrecio()<=0){
                 throw new IllegalArgumentException("El precio no puede ser negativo o igual 0");
@@ -139,9 +139,7 @@ public class PedidoServices {
             Pedido pedido = pedidoRepositorio.save(entity);
 
             return pedido;
-        }catch (Exception e){
-            throw new IllegalArgumentException("Error al crear pedido");
-        }
+
     }
 
 

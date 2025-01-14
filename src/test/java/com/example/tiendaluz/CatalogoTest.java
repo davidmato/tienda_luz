@@ -86,11 +86,32 @@ public class CatalogoTest {
         List<CatalogoDTO> catalogo = catalogoServices.getAllDTO();
 
 
-
         //THEN
 
         assertEquals(2, catalogo.size());
     }
+
+
+    /**
+     * Test negativo del primer ejercicio: obtener todos los catalogos con sus productos y tallas
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testFindAllNegativo() {
+        //GIVEN
+        catalogoRepositorio.deleteAll();
+
+        //WHEN
+        List<CatalogoDTO> catalogo = catalogoServices.getAllDTO();
+
+        //THEN
+        assertTrue(catalogo.isEmpty());
+    }
+
+
+
+
 
     @Test
     public void testFindById() throws Exception {

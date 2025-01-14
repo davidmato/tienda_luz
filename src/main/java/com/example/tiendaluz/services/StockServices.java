@@ -62,16 +62,13 @@ public class StockServices {
      */
     @Transactional
     public Stock modificarStock(StockDTO dto, Integer id) {
-        try {
+
             Stock entity = stockRepositorio.getReferenceById(id);
             if (dto.getCantidad() < 0) {
                 throw new IllegalArgumentException("El stock no puede ser negativo");
             }
             entity.setCantidad(dto.getCantidad());
             return stockRepositorio.save(entity);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
         }
     }
-}
+

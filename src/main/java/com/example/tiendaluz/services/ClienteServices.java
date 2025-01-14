@@ -49,6 +49,9 @@ public class ClienteServices {
         return clientes;
     }
 
+    public List<Cliente>FindAll(){
+        return clienteRepositorio.findAll();
+    }
     /**
      * Buscar todas las cliente
      */
@@ -63,10 +66,9 @@ public class ClienteServices {
      * Buscar cliente por id
      */
     public Cliente getById(Integer id) {
-        return clienteRepositorio.findById(id).orElse(null);
+        return clienteRepositorio.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con el id: " + id));
     }
-
-
     /**
      * crea una cliente nueva o modifica una existente
      */

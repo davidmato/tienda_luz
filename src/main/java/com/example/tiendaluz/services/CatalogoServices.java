@@ -5,6 +5,8 @@ import com.example.tiendaluz.dto.ProductoDTO;
 import com.example.tiendaluz.dto.TipoTallaDTO;
 import com.example.tiendaluz.modelos.Catalogo;
 import com.example.tiendaluz.modelos.Cliente;
+import com.example.tiendaluz.modelos.Producto;
+import com.example.tiendaluz.modelos.TipoTalla;
 import com.example.tiendaluz.repositorios.CatalogoRepositorio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -78,31 +80,38 @@ public class    CatalogoServices {
 
 
     public List<CatalogoDTO> getAllDTO() {
-        List<Catalogo> catalogos = catalogoRepositorio.findAll();
-        List<CatalogoDTO>catalogoDTOS = new ArrayList<>();
-        for (Catalogo catalogo : catalogos) {
-            CatalogoDTO dto = new CatalogoDTO();
-            dto.setPrecio(catalogo.getPrecio());
+        List<CatalogoDTO> catalogoDTOS = new ArrayList<>();
+        try {
+            List<Catalogo> catalogos = catalogoRepositorio.findAll();
+            for (Catalogo catalogo : catalogos) {
+                CatalogoDTO dto = new CatalogoDTO();
+                dto.setPrecio(catalogo.getPrecio());
 
-            ProductoDTO productoDTO = new ProductoDTO();
-            productoDTO.setNombre(catalogo.getProducto().getNombre());
-            productoDTO.setDescripcion(catalogo.getProducto().getDescripcion());
-            productoDTO.setColor(catalogo.getProducto().getColor());
-            productoDTO.setUnidades(catalogo.getProducto().getUnidades());
+                Producto producto = catalogo.getProducto();
+                if (producto != null) {
+                    ProductoDTO productoDTO = new ProductoDTO();
+                    productoDTO.setNombre(producto.getNombre());
+                    productoDTO.setDescripcion(producto.getDescripcion());
+                    productoDTO.setColor(producto.getColor());
+                    productoDTO.setUnidades(producto.getUnidades());
+                    dto.setProducto(productoDTO);
+                }
 
-            TipoTallaDTO tipoTallaDTO = new TipoTallaDTO();
-            tipoTallaDTO.setNombre(catalogo.getTipoTalla().getNombre());
-            tipoTallaDTO.setProducto(productoDTO);
+                TipoTalla tipoTalla = catalogo.getTipoTalla();
+                if (tipoTalla != null) {
+                    TipoTallaDTO tipoTallaDTO = new TipoTallaDTO();
+                    tipoTallaDTO.setNombre(tipoTalla.getNombre());
+                    tipoTallaDTO.setProducto(dto.getProducto());
+                    dto.setTipoTalla(tipoTallaDTO);
+                }
 
-            dto.setProducto(productoDTO);
-            dto.setTipoTalla(tipoTallaDTO);
-
-            catalogoDTOS.add(dto);
+                catalogoDTOS.add(dto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return catalogoDTOS;
     }
-
-
 }
 
 
