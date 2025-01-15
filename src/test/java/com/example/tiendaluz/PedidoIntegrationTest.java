@@ -35,8 +35,11 @@ public class PedidoIntegrationTest {
     private PedidoServices pedidoServices;
 
 
+
+
     @Test
     void crearPedidoConFechaAnterior() {
+        //GIVEN
         CrearPedidoDTO pedidoDTO = new CrearPedidoDTO();
         pedidoDTO.setPrecio(100.0);
         pedidoDTO.setFecha(LocalDate.now().minusDays(1));
@@ -44,6 +47,7 @@ public class PedidoIntegrationTest {
         pedidoDTO.setIdTipoPago(1);
         pedidoDTO.setIdProducto(Arrays.asList(1, 2));
 
+        //WHEN && THEN
         assertThrows(IllegalArgumentException.class, () -> {
             pedidoServices.crearPedido(pedidoDTO);
         });
