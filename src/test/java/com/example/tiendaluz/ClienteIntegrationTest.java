@@ -84,6 +84,8 @@ public class ClienteIntegrationTest {
 
     @Test
     public void eliminarClienteReferenciado() {
+
+        //GIVEN
         Cliente cliente = new Cliente();
         cliente.setId(1);
         cliente.setNombre("Cliente Test");
@@ -111,10 +113,12 @@ public class ClienteIntegrationTest {
         Mockito.when(clienteRepositorio.findById(1)).thenReturn(Optional.of(cliente));
         Mockito.doThrow(DataIntegrityViolationException.class).when(clienteRepositorio).deleteById(1);
 
+
+        // WHEN
         Exception exception = assertThrows(ClienteReferencedException.class, () -> {
             clienteServices.eliminarCliente(1);
         });
-
+        // THEN
         assertEquals("No se puede eliminar el Cliente: está referenciado por otras entidades", exception.getMessage());
     }
 

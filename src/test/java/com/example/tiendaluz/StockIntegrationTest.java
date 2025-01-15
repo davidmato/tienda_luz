@@ -33,15 +33,19 @@ public class StockIntegrationTest {
 
     @Test
     public void modificarStockConIdInvalido() {
+        //GIVEN
         StockDTO dto = new StockDTO();
         dto.setCantidad(10);
 
         when(stockRepositorio.findById(1)).thenReturn(Optional.empty());
 
+
+        //WHEN
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             stockServices.modificarStock(dto, 1);
         });
 
+        //THEN
         assertEquals("ID invalido", exception.getMessage());
         verify(stockRepositorio, never()).save(any(Stock.class));
     }

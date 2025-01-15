@@ -82,10 +82,13 @@ public class ClienteTest {
      */
     @Test
     public void testEliminarClienteExistente() {
+        //GIVEN
         Integer id = 1;
 
+        //WHEN
         String mensaje = clienteServices.eliminarCliente(id);
 
+        //THEN
         assertEquals("Cliente eliminado correctamente", mensaje);
         assertFalse(clienteRepositorio.findById(id).isPresent());
     }
@@ -95,10 +98,14 @@ public class ClienteTest {
      */
     @Test
     public void testEliminarClienteNoExistente() {
+        //GIVEN
         Integer id = 241;
 
+        //WHEN
         String mensaje = clienteServices.eliminarCliente(id);
 
+
+        //THEN
         assertEquals("El cliente con el id indicado no existe", mensaje);
     }
 

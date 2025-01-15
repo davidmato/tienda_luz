@@ -80,6 +80,7 @@ public class PedidoTest {
 
     @Test
     public void testCrearPedidoConDatosValidos() {
+        //GIVEN
         CrearPedidoDTO pedidoDTO = new CrearPedidoDTO();
         pedidoDTO.setPrecio(200.0);
         pedidoDTO.setFecha(LocalDate.now().plusDays(1));
@@ -89,8 +90,10 @@ public class PedidoTest {
         idProductos.add(1);
         pedidoDTO.setIdProducto(idProductos);
 
+        //WHEN
         Pedido pedido = pedidoServices.crearPedido(pedidoDTO);
 
+        //THEN
         assertNotNull(pedido);
         assertEquals(200.0, pedido.getPrecio());
         assertEquals(LocalDate.now().plusDays(1), pedido.getFecha());
@@ -101,6 +104,8 @@ public class PedidoTest {
 
     @Test
     public void testCrearPedidoConPrecioNegativo() {
+
+        //GIVEN
         CrearPedidoDTO pedidoDTO = new CrearPedidoDTO();
         pedidoDTO.setPrecio(-200.0);
         pedidoDTO.setFecha(LocalDate.now().plusDays(1));
@@ -110,15 +115,19 @@ public class PedidoTest {
         idProductos.add(1);
         pedidoDTO.setIdProducto(idProductos);
 
+        //WHEN
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             pedidoServices.crearPedido(pedidoDTO);
         });
 
+        //THEN
         assertEquals("El precio no puede ser negativo o igual 0", exception.getMessage());
     }
 
     @Test
     public void testCrearPedidoConFechaPasada() {
+
+        //GIVEN
         CrearPedidoDTO pedidoDTO = new CrearPedidoDTO();
         pedidoDTO.setPrecio(200.0);
         pedidoDTO.setFecha(LocalDate.now().minusDays(1));
@@ -128,10 +137,12 @@ public class PedidoTest {
         idProductos.add(1);
         pedidoDTO.setIdProducto(idProductos);
 
+        //WHEN
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             pedidoServices.crearPedido(pedidoDTO);
         });
 
+        //THEN
         assertEquals("La fecha no puede ser anterior a la actual", exception.getMessage());
     }
 

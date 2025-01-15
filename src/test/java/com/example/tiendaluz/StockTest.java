@@ -53,11 +53,15 @@ public class StockTest {
 
     @Test
     public void testModificarStockConDatosValidos() {
+
+        //GIVEN
         StockDTO dto = new StockDTO();
         dto.setCantidad(10);
 
+        //WHEN
         Stock result = stockServices.modificarStock(dto, 1);
 
+        //THEN
         assertNotNull(result);
         assertEquals(10, result.getCantidad());
     }
@@ -67,13 +71,17 @@ public class StockTest {
      */
     @Test
     public void testModificarStockConCantidadNegativa() {
+
+        //GIVEN
         StockDTO dto = new StockDTO();
         dto.setCantidad(-5);
 
+        //WHEN
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             stockServices.modificarStock(dto, 1);
         });
 
+        //THEN
         assertEquals("El stock no puede ser negativo", exception.getMessage());
     }
 
