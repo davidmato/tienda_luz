@@ -161,8 +161,6 @@ public class ClienteServices {
     }
 
 
-
-
     public Cliente save(ClienteDTO dto){
         Cliente entity = new Cliente();
         entity.setNombre(dto.getNombre());
@@ -175,7 +173,7 @@ public class ClienteServices {
         Usuario usuario = new Usuario();
         usuario.setUsername(dto.getUsuarioDTO().getUsername());
         usuario.setPassword(passwordEncoder.encode(dto.getUsuarioDTO().getPassword()));
-        usuario.setRol(dto.getUsuarioDTO().getRol() != null ? Rol.valueOf(dto.getUsuarioDTO().getRol()) : Rol.CLIENTE); // Set default role if not provided
+        usuario.setRol(dto.getUsuarioDTO().getRol() != null ? Rol.valueOf(dto.getUsuarioDTO().getRol()) : Rol.CLIENTE);
         entity.setUsuario(usuario);
 
         return clienteRepositorio.save(entity);

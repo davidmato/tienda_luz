@@ -100,8 +100,6 @@ public class DetallesVentaServices {
 
                 detallesVentaDTOS.add(dto);
 
-
-
             }
         }
         return detallesVentaDTOS;

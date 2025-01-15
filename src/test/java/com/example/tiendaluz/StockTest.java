@@ -47,6 +47,10 @@ public class StockTest {
         stockRepositorio.save(stock);
     }
 
+    /**
+     * Test para modificar el stock de un producto
+     */
+
     @Test
     public void testModificarStockConDatosValidos() {
         StockDTO dto = new StockDTO();
@@ -58,6 +62,9 @@ public class StockTest {
         assertEquals(10, result.getCantidad());
     }
 
+    /**
+     * Test para modificar el stock de un producto con cantidad negativa
+     */
     @Test
     public void testModificarStockConCantidadNegativa() {
         StockDTO dto = new StockDTO();

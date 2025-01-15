@@ -25,6 +25,5 @@ public class PedidoProducto {
     @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
 
-    @Column(name = "cantidad", nullable = false)
-    private Integer cantidad;
+
 }

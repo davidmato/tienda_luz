@@ -95,7 +95,6 @@ public class CatalogoTest {
     /**
      * Test negativo del primer ejercicio: obtener todos los catalogos con sus productos y tallas
      *
-     * @throws Exception
      */
     @Test
     public void testFindAllNegativo() {

@@ -22,6 +22,7 @@ public class StockServices {
     private StockRepositorio stockRepositorio;
     private TipoTallaRepositorio tipoTallaRepositorio;
     private ProductoRepositorio productoRepositorio;
+
     /**
      * Buscar todas las stock
      */
@@ -56,19 +57,17 @@ public class StockServices {
      */
 
 
-
     /**
      * A traves de  un JSON con los datos del producto y la cantidad a modificar junto con la talla, modifica el stock del producto para esa talla
      */
     @Transactional
     public Stock modificarStock(StockDTO dto, Integer id) {
-
-            Stock entity = stockRepositorio.getReferenceById(id);
-            if (dto.getCantidad() < 0) {
-                throw new IllegalArgumentException("El stock no puede ser negativo");
-            }
-            entity.setCantidad(dto.getCantidad());
-            return stockRepositorio.save(entity);
+        Stock entity = stockRepositorio.findById(id).orElseThrow(() -> new IllegalArgumentException("ID invalido"));
+        if (dto.getCantidad() < 0) {
+            throw new IllegalArgumentException("El stock no puede ser negativo");
         }
+        entity.setCantidad(dto.getCantidad());
+        return stockRepositorio.save(entity);
     }
 
+}

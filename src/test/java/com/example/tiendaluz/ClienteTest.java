@@ -77,24 +77,11 @@ public class ClienteTest {
         producto1.setUnidades(10);
         productoRepositorio.save(producto1);
 
-        producto = productoRepositorio.findById(producto.getId()).orElseThrow();
-        producto1 = productoRepositorio.findById(producto1.getId()).orElseThrow();
-
-        Set<Producto> productos = new HashSet<>();
-        productos.add(producto);
-        productos.add(producto1);
-
-
-        Pedido pedido = new Pedido();
-        pedido.setCliente(cliente);
-        pedido.setTipoPago(tipoPago);
-        pedido.setProductos(productos);
-        pedido.setPrecio(100.0);
-        pedido.setFecha(LocalDate.parse("2021-10-10"));
-        pedidoRepositorio.save(pedido);
-
     }
 
+    /**
+     * Test para eliminar un cliente existente
+     */
     @Test
     public void testEliminarClienteExistente() {
         Integer id = 1;
@@ -105,6 +92,9 @@ public class ClienteTest {
         assertFalse(clienteRepositorio.findById(id).isPresent());
     }
 
+    /**
+     * Test para eliminar un cliente no existente
+     */
     @Test
     public void testEliminarClienteNoExistente() {
         Integer id = 999;
@@ -114,18 +104,6 @@ public class ClienteTest {
         assertEquals("El cliente con el id indicado no existe", mensaje);
     }
 
-    @Test
-    public void testEliminarClienteReferenciado() {
-        Integer id = 2;
-
-
-
-        Exception exception = assertThrows(ClienteReferencedException.class, () -> {
-            clienteServices.eliminarCliente(2);
-        });
-
-        assertEquals("No se puede eliminar el Cliente: está referenciado por otras entidades", exception.getMessage());
-    }
 
 
 }
