@@ -71,6 +71,9 @@ public class TipoTallaTest {
         assertEquals(2, cantidad);
     }
 
+    /**
+     * Test de integración para el metodo cantidadProducto de TipoTallaServices
+     */
     @Test
     public void cantidadDisponibleTipoTalla(){
         // GIVEN
@@ -81,6 +84,10 @@ public class TipoTallaTest {
         // THEN
         assertEquals("Hay productos disponibles. Unidades: 50", disponibilidad);
     }
+
+    /**
+     * Test de integración para el metodo cantidadProducto de TipoTallaServices
+     */
 
     @Test
     public void cantidadNoDisponibleTipoTalla(){
@@ -93,46 +100,4 @@ public class TipoTallaTest {
         assertEquals("No hay productos disponibles", disponibilidad);
     }
 
-
-
-
-
-    @Test
-    @Transactional
-    @Commit
-    void testCrearTipoTalla(){
-        Producto producto = new Producto();
-        producto.setNombre("camiseta");
-        producto.setColor("azul");
-        producto.setDescripcion("hecha de algodon");
-        producto.setUnidades(110);
-        Producto productoGuardado = productoServices.guardar(producto);
-
-        TipoTalla tipoTalla = new TipoTalla();
-        tipoTalla.setNombre("XXL");
-        tipoTalla.setProducto(productoGuardado);
-        TipoTalla tipoTallaGuardado = tipoTallaServices.guardar(tipoTalla);
-        System.out.println(tipoTallaGuardado.toString());
-    }
-    @Test
-    void testEditarTipoTalla(){
-        TipoTalla tipoTalla = tipoTallaServices.getById(6);
-        tipoTalla.setNombre("L");
-        TipoTalla tipoTallaGuardado = tipoTallaServices.guardar(tipoTalla);
-        System.out.println(tipoTallaGuardado.toString());
-
-    }
-    @Test
-    @Transactional
-    void testEliminar(){
-        tipoTallaServices.eliminarPorId(3);
-    }
-
-    @Test
-    void testBuscarTipoTallas(){
-        System.out.println("TipoTallas");
-        for (TipoTalla t : tipoTallaServices.getAll()){
-            System.out.println(t.getNombre());
-        }
-    }
 }

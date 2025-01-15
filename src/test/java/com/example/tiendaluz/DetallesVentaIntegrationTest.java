@@ -32,6 +32,9 @@ public class DetallesVentaIntegrationTest {
     @InjectMocks
     private DetallesVentaServices detallesVentaServices;
 
+    /**
+     * Test de integración para el metodo getAllDTOByIdCliente de DetallesVentaServices
+     */
 
     @Test
     void testTotalPedidosCuandoClienteExiste() {

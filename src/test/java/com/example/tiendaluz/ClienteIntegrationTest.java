@@ -32,6 +32,9 @@ public class ClienteIntegrationTest {
     @Mock
     private ClienteRepositorio clienteRepositorio; //SIMULADO
 
+    /**
+     * Test de integración para el metodo findAll de ClienteServices
+     */
     @Test
     public void TestFindAllIntegration() {
         //GIVEN

@@ -38,6 +38,10 @@ public class CatalogoIntegrationTest {
     private CatalogoRepositorio catalogoRepositorio; //SIMULADO
 
 
+    /**
+     * Test de integración para el metodo findAll de CatalogoServices
+     */
+
     @Test
     public void testFindAllIntegration() {
         //GIVEN
