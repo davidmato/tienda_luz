@@ -38,8 +38,6 @@ public class ClienteTest {
     @BeforeEach
     public void inicializarDatos() {
 
-
-
         Cliente cliente1 = new Cliente();
         cliente1.setNombre("Cliente 1");
         cliente1.setApellido("Apellido 1");
@@ -97,7 +95,7 @@ public class ClienteTest {
      */
     @Test
     public void testEliminarClienteNoExistente() {
-        Integer id = 999;
+        Integer id = 241;
 
         String mensaje = clienteServices.eliminarCliente(id);
 
