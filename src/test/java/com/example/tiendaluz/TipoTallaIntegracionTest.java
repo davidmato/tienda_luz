@@ -26,7 +26,9 @@ public class TipoTallaIntegracionTest {
     @Mock
     private ProductoServices productoServices;
 
-
+    /**
+     * Test para obtener la cantidad de un producto cuando no existe
+     */
     @Test
     void cantidadProductoCuandoProductoNoExiste() {
         when(productoServices.getById(1)).thenReturn(null);

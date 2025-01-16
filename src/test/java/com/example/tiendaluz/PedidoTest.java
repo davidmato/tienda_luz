@@ -78,6 +78,10 @@ public class PedidoTest {
         productoRepositorio.save(producto);
     }
 
+    /**
+     * Test para crear un pedido con datos válidos
+     */
+
     @Test
     public void testCrearPedidoConDatosValidos() {
         //GIVEN
@@ -102,6 +106,10 @@ public class PedidoTest {
         assertEquals(1, pedido.getProductos().size());
     }
 
+    /**
+     * Test para crear un pedido con precio negativo
+     */
+
     @Test
     public void testCrearPedidoConPrecioNegativo() {
 
@@ -123,6 +131,10 @@ public class PedidoTest {
         //THEN
         assertEquals("El precio no puede ser negativo o igual 0", exception.getMessage());
     }
+
+    /**
+     * Test para crear un pedido con fecha pasada
+     */
 
     @Test
     public void testCrearPedidoConFechaPasada() {

@@ -80,8 +80,11 @@ public class DetallesVentaTest {
         pedidoRepositorio.save(pedido);
     }
 
+    /**
+     * Test para obtener todos los detalles de venta de un cliente
+     */
     @Test
-    public void testTotalPedidosCuandoCliqenteExiste() {
+    public void testTotalPedidosCuandoClienteExiste() {
         // GIVEN
 
         // WHEN
@@ -95,6 +98,9 @@ public class DetallesVentaTest {
     }
 
 
+    /**
+     * Test para obtener todos los detalles de venta de un cliente cuando el cliente no existe
+     */
     @Test
     public void getAllDTOByIdClienteCuandoClienteNoExiste() {
         // GIVEN

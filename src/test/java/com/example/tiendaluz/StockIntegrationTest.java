@@ -31,6 +31,9 @@ public class StockIntegrationTest {
     private StockRepositorio stockRepositorio;
 
 
+    /**
+     * Test para modificar stock con id invalido
+     */
     @Test
     public void modificarStockConIdInvalido() {
         //GIVEN

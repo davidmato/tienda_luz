@@ -70,6 +70,7 @@ public class ClienteIntegrationTest {
 
     }
 
+
     @Test
     public void testBuscarPorIdIntegration() throws Exception {
         //GIVEN
@@ -81,7 +82,9 @@ public class ClienteIntegrationTest {
     }
 
 
-
+    /**
+     * Test de integración para el metodo eliminarCliente de ClienteServices
+     */
     @Test
     public void eliminarClienteReferenciado() {
 

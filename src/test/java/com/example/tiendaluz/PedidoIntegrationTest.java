@@ -35,8 +35,9 @@ public class PedidoIntegrationTest {
     private PedidoServices pedidoServices;
 
 
-
-
+    /**
+     * Test para crear un pedido con un producto que no existe
+     */
     @Test
     void crearPedidoConFechaAnterior() {
         //GIVEN
