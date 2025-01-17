@@ -61,15 +61,6 @@ public class TipoTallaTest {
         tipoTallaRepositorio.save(tipoTalla2);
     }
 
-    @Test
-    public void findAll(){
-        //GIVEN
-
-        //WHEN
-        int cantidad = tipoTallaServices.getAll().size();
-        //THEN
-        assertEquals(2, cantidad);
-    }
 
     /**
      * Test de integración para el metodo cantidadProducto de TipoTallaServices

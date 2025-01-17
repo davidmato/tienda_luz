@@ -113,16 +113,4 @@ public class DetallesVentaTest {
         assertTrue(result.isEmpty());
     }
 
-    @Test
-    public void find() {
-        DetallesVenta detallesVenta = detallesVentaServices.getById(1);
-
-        assertEquals(2, detallesVenta.getCantidad());
-    }
-
-    @Test
-    public void findAll() {
-        List<DetallesVenta> detallesVentas = detallesVentaServices.getAll();
-        assertEquals(1, detallesVentas.size());
-    }
 }

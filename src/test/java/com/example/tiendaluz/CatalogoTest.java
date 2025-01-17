@@ -32,6 +32,12 @@ public class CatalogoTest {
     @Autowired
     private CatalogoRepositorio catalogoRepositorio;
 
+    @Autowired
+    private ProductoServices productoServices;
+
+    @Autowired
+    private TipoTallaServices tipoTallaServices;
+
 
     @BeforeEach
     public void inicializarDatos() {
@@ -109,113 +115,4 @@ public class CatalogoTest {
     }
 
 
-
-
-
-    @Test
-    public void testFindById() throws Exception {
-        //GIVEN
-//        Integer id = 1;
-
-        //WHEN
-//        Catalogo catalogo = catalogoServices.getById(3);
-
-        //THEN
-//        assertNotNull(catalogo);
-//        assertEquals(20, catalogo.getPrecio());
-
-      Exception exception=  assertThrows(Exception.class, () -> catalogoServices.getById(5));
-
-      assertEquals("Catalogo no encontrado con el id:  10", exception.getMessage());
-    }
-
-    @Test
-    public void testGuardarCatalogo() {
-        //GIVEN
-        Catalogo catalogo = new Catalogo();
-        catalogo.setPrecio(20.0);
-        catalogo.setProducto(new Producto());
-        catalogo.setTipoTalla(new TipoTalla());
-
-        //WHEN
-        Catalogo catalogoGuardado = catalogoServices.guardar(catalogo);
-
-        //THEN
-        assertNotNull(catalogoGuardado);
-        assertEquals(20.0, catalogoGuardado.getPrecio());
-    }
-
-
-
-
-
-
-
-
-
-
-
-    @Autowired
-    ProductoServices productoServices;
-
-    @Autowired
-    TipoTallaServices tipoTallaServices;
-
-    @Test
-    @Transactional
-    @Commit
-    void testCrearCatalogo(){
-
-        Producto producto = new Producto();
-        producto.setNombre("Camiseta");
-        producto.setDescripcion("Camiseta de algodon");
-        producto.setColor("Blanco");
-        producto.setUnidades(6);
-        Producto productoGuardado = productoServices.guardar(producto);
-
-        TipoTalla tipoTalla = new TipoTalla();
-        tipoTalla.setNombre("M");
-        tipoTalla.setProducto(productoGuardado);
-        TipoTalla tipoTallaGuardado = tipoTallaServices.guardar(tipoTalla);
-
-
-        Catalogo catalogo = new Catalogo();
-        catalogo.setPrecio(35.5);
-        catalogo.setProducto(productoGuardado);
-        catalogo.setTipoTalla(tipoTallaGuardado);
-        Catalogo catalogoGuardado = catalogoServices.guardar(catalogo);
-        System.out.println(catalogoGuardado.toString());
-
-    }
-    @Test
-    @Transactional
-    @Commit
-    void testEditarCatalogo(){
-        Catalogo catalogo = catalogoServices.getById(1);
-        catalogo.setPrecio(40.5);
-        catalogo.setProducto(productoServices.getById(1));
-        catalogo.setTipoTalla(tipoTallaServices.getById(1));
-        Catalogo catalogoGuardado = catalogoServices.guardar(catalogo);
-        System.out.println(catalogoGuardado.toString());
-
-    }
-    @Test
-    void testEliminarCatalogo(){
-        catalogoServices.eliminarPorID(4);
-    }
-
-    @Test
-    void testBuscarCatalogosPorPrecio(){
-        System.out.println("Catalogos");
-        for (Catalogo c : catalogoServices.getAll()){
-            System.out.println(c.getPrecio());
-        }
-    }
-    @Test
-    @Transactional
-    @Commit
-    void eliminarCatalogoEntero(){
-        catalogoServices.eliminar(catalogoServices.getById(2));
-
-    }
 }

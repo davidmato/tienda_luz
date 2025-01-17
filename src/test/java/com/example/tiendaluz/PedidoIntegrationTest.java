@@ -23,12 +23,6 @@ import static org.mockito.Mockito.when;
 public class PedidoIntegrationTest {
 
     @Mock
-    private ClienteRepositorio clienteRepositorio;
-    @Mock
-    private TipoPagoRepositorio tipoPagoRepositorio;
-    @Mock
-    private ProductoRepositorio productoRepositorio;
-    @Mock
     private PedidoRepositorio pedidoRepositorio;
 
     @InjectMocks
