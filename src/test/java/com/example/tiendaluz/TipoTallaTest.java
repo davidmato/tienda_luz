@@ -33,6 +33,10 @@ public class TipoTallaTest {
     @Autowired
     private ProductoRepositorio productoRepositorio;
 
+    /**
+     * TEST 2
+     */
+
     @BeforeEach
     public void inicializarDatos() {
         Producto producto1 = new Producto();

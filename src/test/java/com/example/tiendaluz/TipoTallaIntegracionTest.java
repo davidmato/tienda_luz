@@ -27,6 +27,9 @@ public class TipoTallaIntegracionTest {
     private ProductoServices productoServices;
 
     /**
+     * TEST 6 INTEGRACION
+     */
+    /**
      * Test para obtener la cantidad de un producto cuando no existe
      */
     @Test

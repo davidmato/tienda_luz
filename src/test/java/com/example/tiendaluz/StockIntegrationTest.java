@@ -30,6 +30,9 @@ public class StockIntegrationTest {
     @Mock
     private StockRepositorio stockRepositorio;
 
+    /**
+     * TEST 5 INTEGRACION
+     */
 
     /**
      * Test para modificar stock con id invalido

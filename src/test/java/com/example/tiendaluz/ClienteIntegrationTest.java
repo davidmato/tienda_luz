@@ -33,6 +33,10 @@ public class ClienteIntegrationTest {
     private ClienteRepositorio clienteRepositorio; //SIMULADO
 
     /**
+     * TEST 6 INTEGRACION
+     */
+
+    /**
      * Test de integración para el metodo findAll de ClienteServices
      */
     @Test

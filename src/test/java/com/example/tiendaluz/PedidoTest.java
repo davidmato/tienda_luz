@@ -44,6 +44,10 @@ public class PedidoTest {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+
+    /**
+     * TEST 4
+     */
     @BeforeEach
     public void inicializarDatos() {
         Usuario usuario = new Usuario();

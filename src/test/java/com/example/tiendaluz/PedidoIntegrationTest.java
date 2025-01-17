@@ -28,6 +28,9 @@ public class PedidoIntegrationTest {
     @InjectMocks
     private PedidoServices pedidoServices;
 
+    /**
+     * TEST 4 INTEGRACION
+     */
 
     /**
      * Test para crear un pedido con un producto que no existe

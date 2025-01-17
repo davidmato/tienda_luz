@@ -27,6 +27,10 @@ public class StockTest {
     @Autowired
     private StockServices stockServices;
 
+    /**
+     * TEST 5
+     */
+
     @BeforeEach
     public void inicializarDatos() {
         Producto producto = new Producto();

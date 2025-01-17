@@ -37,6 +37,9 @@ public class CatalogoIntegrationTest {
     @Mock
     private CatalogoRepositorio catalogoRepositorio; //SIMULADO
 
+    /**
+     * TEST 1 INTEGRACION
+     */
 
     /**
      * Test de integración para el metodo findAll de CatalogoServices

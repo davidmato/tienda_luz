@@ -27,6 +27,7 @@ public class ProductoTest {
     @Autowired
     private ProductoRepositorio productoRepositorio;
 
+
     @BeforeEach
     public void inicializarDatos() {
         Producto producto1 = new Producto();

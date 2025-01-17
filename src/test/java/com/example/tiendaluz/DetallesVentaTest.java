@@ -45,6 +45,10 @@ public class DetallesVentaTest {
     @Autowired
     private ProductoRepositorio productoRepositorio;
 
+    /**
+     * TEST 3
+     */
+
     @BeforeEach
     public void inicializarDatos() {
         Cliente cliente = new Cliente();

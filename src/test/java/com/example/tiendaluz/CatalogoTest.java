@@ -38,6 +38,9 @@ public class CatalogoTest {
     @Autowired
     private TipoTallaServices tipoTallaServices;
 
+    /**
+     * TEST 1
+     */
 
     @BeforeEach
     public void inicializarDatos() {

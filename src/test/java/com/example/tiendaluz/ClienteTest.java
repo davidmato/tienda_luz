@@ -35,6 +35,9 @@ public class ClienteTest {
     @Autowired
     private PedidoRepositorio pedidoRepositorio;
 
+    /**
+     * TEST 6
+     */
     @BeforeEach
     public void inicializarDatos() {
 
