@@ -8,7 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "stock", schema = "luz", catalog = "postgres")
+@Table(name = "stock", schema = "luz")//, catalog = "postgres")
 @Getter
 @Setter
 @ToString

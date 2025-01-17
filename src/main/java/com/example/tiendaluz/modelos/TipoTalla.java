@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "tipo_talla", schema = "luz", catalog = "postgres")
+@Table(name = "tipo_talla", schema = "luz")//, catalog = "postgres")
 @Getter
 @Setter
 @ToString

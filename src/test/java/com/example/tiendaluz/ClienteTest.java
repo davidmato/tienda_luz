@@ -1,59 +1,112 @@
 package com.example.tiendaluz;
 
-import com.example.tiendaluz.modelos.Cliente;
+import com.example.tiendaluz.enumerados.Rol;
+import com.example.tiendaluz.exceptions.ClienteReferencedException;
+import com.example.tiendaluz.modelos.*;
+import com.example.tiendaluz.repositorios.*;
 import com.example.tiendaluz.services.ClienteServices;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class ClienteTest {
+    @Autowired
+    private ClienteRepositorio clienteRepositorio;
 
     @Autowired
     private ClienteServices clienteServices;
 
+    @Autowired
+    private TipoPagoRepositorio tipoPagoRepositorio;
+
+    @Autowired
+    private ProductoRepositorio productoRepositorio;
+
+    @Autowired
+    private PedidoRepositorio pedidoRepositorio;
+
+    @BeforeEach
+    public void inicializarDatos() {
+
+        Cliente cliente1 = new Cliente();
+        cliente1.setNombre("Cliente 1");
+        cliente1.setApellido("Apellido 1");
+        cliente1.setDireccion("Direccion 1");
+        cliente1.setDni("12345678");
+        cliente1.setEmail("cliente1@example.com");
+        cliente1.setTelefono("123456789");
+        clienteRepositorio.save(cliente1);
 
 
-    @Test
-    void  testCrearCliente() {
         Cliente cliente = new Cliente();
-        cliente.setNombre("Juan");
-        cliente.setApellido("Perez");
-        cliente.setDni("12344346A");
-        cliente.setDireccion("Calle 123");
-        cliente.setTelefono("1234567");
-        cliente.setEmail("juanperez@safaryes.es");
-        Cliente clienteGuardado = clienteServices.guardar(cliente);
-        System.out.println(clienteGuardado.toString());
+        cliente.setNombre("Cliente 2");
+        cliente.setApellido("Apellido 2");
+        cliente.setDireccion("Direccion 2");
+        cliente.setDni("12345678");
+        cliente.setEmail("cliente1@example.com");
+        cliente.setTelefono("123456789");
+        clienteRepositorio.save(cliente);
+
+        TipoPago tipoPago = new TipoPago();
+        tipoPago.setNombre("Tipo Pago 1");
+        tipoPagoRepositorio.save(tipoPago);
+
+        Producto producto = new Producto();
+        producto.setNombre("Producto 1");
+        producto.setDescripcion("Descripcion 1");
+        producto.setColor("Color 1");
+        producto.setUnidades(10);
+        productoRepositorio.save(producto);
+
+        Producto producto1 = new Producto();
+        producto1.setNombre("Producto 1");
+        producto1.setDescripcion("Descripcion 1");
+        producto1.setColor("Color 1");
+        producto1.setUnidades(10);
+        productoRepositorio.save(producto1);
+
     }
 
+    /**
+     * Test para eliminar un cliente existente
+     */
     @Test
-    void testEditarCliente(){
-        Cliente cliente = clienteServices.getById(5);
-        cliente.setNombre("Felipe");
-        cliente.setApellido("Rodriguez");
-        cliente.setDni("1234097A");
-        cliente.setDireccion("Calle 823");
-        cliente.setTelefono("1234567");
-        cliente.setEmail("juanperez@safaryes.es");
-        Cliente clienteGuardado = clienteServices.guardar(cliente);
-        System.out.println(clienteGuardado.toString());
+    public void testEliminarClienteExistente() {
+        //GIVEN
+        Integer id = 1;
 
+        //WHEN
+        String mensaje = clienteServices.eliminarCliente(id);
+
+        //THEN
+        assertEquals("Cliente eliminado correctamente", mensaje);
+        assertFalse(clienteRepositorio.findById(id).isPresent());
     }
 
+    /**
+     * Test para eliminar un cliente no existente
+     */
     @Test
-    void testEliminar(){
-        clienteServices.eliminarPorID(6);
-    }
+    public void testEliminarClienteNoExistente() {
+        //GIVEN
+        Integer id = 241;
 
-    @Test
-    void testBuscarClientes(){
-        List<Cliente> clientes = clienteServices.getAll();
-        for (Cliente c : clientes){
-            System.out.println(c.getNombre());
-        }
+        //WHEN
+        String mensaje = clienteServices.eliminarCliente(id);
+
+
+        //THEN
+        assertEquals("El cliente con el id indicado no existe", mensaje);
     }
 
 

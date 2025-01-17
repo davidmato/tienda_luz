@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService implements UserDetailsService {
 
@@ -44,6 +46,10 @@ public class UsuarioService implements UserDetailsService {
 
     public boolean validarPassword(Usuario usuario, String passwordSinEncriptar){
         return passwordEncoder.matches(passwordSinEncriptar, usuario.getPassword());
+    }
+
+    public List<Usuario> findAll (){
+        return usuarioRepository.findAll();
     }
 
 }

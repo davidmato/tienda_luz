@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "tipo_pago", schema = "luz", catalog = "postgres")
+@Table(name = "tipo_pago", schema = "luz")//, catalog = "postgres")
 @Getter
 @Setter
 @ToString
@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TipoPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

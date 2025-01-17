@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "producto", schema = "luz", catalog = "postgres")
+@Table(name = "producto", schema = "luz")//, catalog = "postgres")
 @Getter
 @Setter
 @ToString
@@ -21,7 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Producto {
 
     @Id

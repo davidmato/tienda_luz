@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "pedido_producto", schema = "luz", catalog = "postgres")
+@Table(name = "pedido_producto", schema = "luz")//, catalog = "postgres")
 @Getter
 @Setter
 @ToString
@@ -25,6 +25,5 @@ public class PedidoProducto {
     @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
 
-    @Column(name = "cantidad", nullable = false)
-    private Integer cantidad;
+
 }

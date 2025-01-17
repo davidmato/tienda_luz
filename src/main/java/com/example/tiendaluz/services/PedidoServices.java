@@ -9,6 +9,7 @@ import com.example.tiendaluz.repositorios.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -109,26 +110,34 @@ public class PedidoServices {
      */
 
     public Pedido crearPedido(CrearPedidoDTO pedidoDTO) {
-        Pedido entity = new Pedido();
-        entity.setPrecio(pedidoDTO.getPrecio());
-        entity.setFecha(pedidoDTO.getFecha());
 
-        Cliente cliente = clienteRepositorio.getById(pedidoDTO.getIdCliente());
-        entity.setCliente(cliente);
-        TipoPago tipoPago = tipoPagoRepositorio.getById(pedidoDTO.getIdTipoPago());
-        entity.setTipoPago(tipoPago);
+            Pedido entity = new Pedido();
+            if (pedidoDTO.getPrecio()<=0){
+                throw new IllegalArgumentException("El precio no puede ser negativo o igual 0");
+            }
+            entity.setPrecio(pedidoDTO.getPrecio());
+            if (pedidoDTO.getFecha().isBefore(LocalDate.now())){
+                throw new IllegalArgumentException("La fecha no puede ser anterior a la actual");
+            }
+            entity.setFecha(pedidoDTO.getFecha());
 
-        Set<Producto> productos = new HashSet<>();
-        for (Integer idProducto : pedidoDTO.getIdProducto()) {
-            Producto producto = productoRepositorio.getReferenceById(idProducto);
-            productos.add(producto);
+            Cliente cliente = clienteRepositorio.getById(pedidoDTO.getIdCliente());
+            entity.setCliente(cliente);
+            TipoPago tipoPago = tipoPagoRepositorio.getById(pedidoDTO.getIdTipoPago());
+            entity.setTipoPago(tipoPago);
 
-        }
-        entity.setProductos(productos);
+            Set<Producto> productos = new HashSet<>();
+            for (Integer idProducto : pedidoDTO.getIdProducto()) {
+                Producto producto = productoRepositorio.getReferenceById(idProducto);
+                productos.add(producto);
 
-        Pedido pedido = pedidoRepositorio.save(entity);
+            }
+            entity.setProductos(productos);
 
-        return pedido;
+            Pedido pedido = pedidoRepositorio.save(entity);
+
+            return pedido;
+
     }
 
 

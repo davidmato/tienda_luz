@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "pedido", schema = "luz", catalog = "postgres")
+@Table(name = "pedido", schema = "luz")//, catalog = "postgres")
 @Getter
 @Setter
 @ToString
@@ -22,7 +22,7 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

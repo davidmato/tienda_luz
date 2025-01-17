@@ -22,8 +22,8 @@ public class StockControlador {
     // Add this method to your StockControlador class
 
     @PutMapping("/modificar/{id}")
-    public void modificarStock(@RequestBody StockDTO dto, @PathVariable Integer id) {
-        stockServices.modificarStock(dto, id);
+    public Stock modificarStock(@RequestBody StockDTO dto, @PathVariable Integer id) {
+        return stockServices.modificarStock(dto, id);
     }
     /**
      * Buscar todas las stock
