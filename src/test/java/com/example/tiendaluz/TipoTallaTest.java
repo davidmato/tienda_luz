@@ -67,7 +67,7 @@ public class TipoTallaTest {
 
 
     /**
-     * Test de integración para el metodo cantidadProducto de TipoTallaServices
+     * Test  para el metodo cantidadProducto de TipoTallaServices
      */
     @Test
     public void cantidadDisponibleTipoTalla(){
@@ -81,7 +81,7 @@ public class TipoTallaTest {
     }
 
     /**
-     * Test de integración para el metodo cantidadProducto de TipoTallaServices
+     * Test para el metodo cantidadProducto de TipoTallaServices
      */
 
     @Test
